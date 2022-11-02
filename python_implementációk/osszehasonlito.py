@@ -29,12 +29,4 @@ if __name__ == "__main__":
     while True:
         teszt_params = (int(p) for p in input().split(" "))  # mintahossz szöveghossz abcméret valid
         eset = teszteset(*teszt_params)
-        eset = ("ABABAC", "ABABABCABABABCABABABC", ["A", "B", "C"], 22)
-        eset = (
-            "same",
-            "concretion formed by a mollusk consisting of the same material",
-            set("concretion formed by a mollusk consisting of the same material"),
-            22,
-        )
-        eset = ("aaaaaaaaaaaaaab", "a" * 10**7 + "b", {"a", "b"}, 22)
         osszehasonlit(*eset)
