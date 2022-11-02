@@ -14,7 +14,7 @@ def futasido(func, *args):
     return 1
 
 
-def osszehasonlit(minta, szoveg, abc, megfejtes):
+def osszehasonlit(minta, szoveg, abc):
     futasido(KMP, minta, szoveg)
     P = labfej(minta)
     futasido(KMP, minta, szoveg, P)
