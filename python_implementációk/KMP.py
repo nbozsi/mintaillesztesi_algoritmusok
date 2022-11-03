@@ -12,21 +12,17 @@ def labfej(minta):
     return P
 
 
-def KMP(m, s, P=[]):
+def KMP(minta, szoveg, P=[]):
     if not P:
-        P = labfej(m)
-        print("labfej tömb legenerálva")
-    i = 0
-    j = 0
-    counter = 0
-    while i + j < len(s):
-        counter += 1
-        if j == len(m):
+        P = labfej(minta)
+    i, j = 0,0
+    while i + j < len(szoveg):
+        if j == len(minta):
             return i
         # print(s)
         # print(" " * (i + j) + "^")
         # print(" " * i + m)
-        if s[i + j] == m[j]:
+        if szoveg[i + j] == minta[j]:
             j += 1
         else:
             if j == 0:
@@ -34,8 +30,7 @@ def KMP(m, s, P=[]):
             else:
                 i = i + j - P[j]
                 j = P[j]
-    print(counter)
-    if j == len(m):
+    if j == len(minta):
         return i
     return -1
 
