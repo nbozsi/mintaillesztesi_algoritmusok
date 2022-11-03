@@ -10,12 +10,9 @@ def Horspool(minta, szoveg, abc, E=[]):
         E = tav(minta, abc)
         print("E legenerálva")
     j = len(minta) - 1
-    counter = 0
     while j < len(szoveg):
-        counter += 1
         if szoveg[j] == minta[-1]:
             if szoveg[j - len(minta) + 1 : j + 1] == minta:
-                print(counter)
                 return j - len(minta) + 1
         j = E[szoveg[j]] + j
     return -1
