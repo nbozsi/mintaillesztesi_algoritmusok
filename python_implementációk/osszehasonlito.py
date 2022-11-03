@@ -22,7 +22,6 @@ def osszehasonlit(minta, szoveg, abc):
     E = tav(minta, abc)
     futasido(Horspool, minta, szoveg, abc, E)
     futasido(brute_force, minta, szoveg)
-    print(f"Helyes válasz: {megfejtes}")
 
 
 if __name__ == "__main__":
