@@ -11,7 +11,6 @@ def futasido(func, *args):
     print(func(*args))
     print(f"{time.perf_counter()-start:>20.6f}")
     print("-" * 20)
-    return 1
 
 
 def osszehasonlit(minta, szoveg, abc):
