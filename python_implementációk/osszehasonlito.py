@@ -27,4 +27,5 @@ if __name__ == "__main__":
     while True:
         teszt_params = (int(p) for p in input().split(" "))  # mintahossz szöveghossz abcméret
         eset = teszteset(*teszt_params)
+        eset=("baaaaaaaaa","a"*10**7+"b",['a','b'])
         osszehasonlit(*eset)
