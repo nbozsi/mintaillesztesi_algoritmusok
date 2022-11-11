@@ -20,6 +20,7 @@ int main()
     int y = brute_force(minta, szoveg);
     cout << y << endl;
     map tavok = tav(minta, szoveg);
-    int pos = Horspool(minta, szoveg, tavok);
+    int z = Horspool(minta, szoveg, tavok);
+    cout << z << endl;
     return 0;
 }
