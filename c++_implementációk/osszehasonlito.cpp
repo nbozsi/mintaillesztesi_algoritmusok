@@ -6,7 +6,6 @@
 using namespace std;
 using namespace std::chrono;
 // TODO wrapper function az időméréshez
-// TODO a Horspool a baaaaaaaaaa aaaaaaaaaaaaaaabaaaaaaaaaaaaaa mintára végtelen ciklusba kerül
 int main()
 {
     string minta; // beolvasás
@@ -19,7 +18,8 @@ int main()
     int x = KMP(minta, szoveg, P);          //! a KMP a Horspool után futva mindig -1-t ad
     auto t2 = high_resolution_clock::now(); // végző időpont
     duration<double, std::milli> ms_double = t2 - t1;
-    cout << "KMP" << '\t' << x << '\t' << ms_double.count() << endl;
+    cout << "KMP"
+         << "\t\t" << x << '\t' << ms_double.count() << endl;
 
     t1 = high_resolution_clock::now(); //** időmérés ugyanúgy, mint az előbb
     int y = brute_force(minta, szoveg);
