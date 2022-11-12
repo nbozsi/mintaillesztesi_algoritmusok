@@ -1,7 +1,5 @@
 #include <iostream>
 #include <chrono>
-#include <map>
-#include <vector>
 #include "brute_force.h"
 #include "Horspool.h"
 #include "KMP.h"
@@ -15,12 +13,21 @@ int main()
     cin >> minta;
     cin >> szoveg;
     vector<int> P = labfej(minta);
+    auto t1 = high_resolution_clock::now();
     int x = KMP(minta, szoveg, P);
-    cout << x << '\t' << endl;
+    auto t2 = high_resolution_clock::now();
+    duration<double, std::milli> ms_double = t2 - t1;
+    cout << x << '\t' << ms_double.count() << endl;
+    t1 = high_resolution_clock::now();
     int y = brute_force(minta, szoveg);
-    cout << y << endl;
+    t2 = high_resolution_clock::now();
+    ms_double = t2 - t1;
+    cout << y << '\t' << ms_double.count() << endl;
     map tavok = tav(minta, szoveg);
+    t1 = high_resolution_clock::now();
     int z = Horspool(minta, szoveg, tavok);
-    cout << z << endl;
+    t2 = high_resolution_clock::now();
+    ms_double = t2 - t1;
+    cout << z << '\t' << ms_double.count() << endl;
     return 0;
 }
