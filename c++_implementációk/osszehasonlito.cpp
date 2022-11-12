@@ -5,17 +5,18 @@
 #include "KMP.h"
 using namespace std;
 using namespace std::chrono;
-// TODO valamilyen wrapper function az időméréshez
+// TODO wrapper function az időméréshez
+// TODO a Horspool a baaaaaaaaaa aaaaaaaaaaaaaaabaaaaaaaaaaaaaa mintára végtelen ciklusba kerül
 int main()
 {
-    string minta;
+    string minta; // beolvasás
     string szoveg;
     cin >> minta;
     cin >> szoveg;
 
     vector<int> P = labfej(minta);
     auto t1 = high_resolution_clock::now(); // kezdő időpont
-    int x = KMP(minta, szoveg, P);          //?Ha a KMP a Horspool után fut akkor valamiért mindig -1-t ad eredményül, pedig a stringek nem változnak
+    int x = KMP(minta, szoveg, P);          //! a KMP a Horspool után futva mindig -1-t ad
     auto t2 = high_resolution_clock::now(); // végző időpont
     duration<double, std::milli> ms_double = t2 - t1;
     cout << "KMP" << '\t' << x << '\t' << ms_double.count() << endl;

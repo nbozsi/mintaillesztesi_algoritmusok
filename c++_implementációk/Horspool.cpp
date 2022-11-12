@@ -48,7 +48,7 @@ int main()
     string szoveg;
     cin >> minta;
     cin >> szoveg;
-    map tavok = tav(minta, szoveg);
+    map<char, int> tavok = tav(minta, szoveg);
     int pos = Horspool(minta, szoveg, tavok);
     cout << pos;
     return 0;
