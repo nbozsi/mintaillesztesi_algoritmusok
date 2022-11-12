@@ -36,9 +36,7 @@ int main()
 }
 
 template <typename Function>
-void timeit(string title, Function func)
+void timeit(string title, Function func) //? hogy lehet különbőző argumentumokat adni a belső függvénynek
 {
-    //...
     func(title);
-    //...
 }
