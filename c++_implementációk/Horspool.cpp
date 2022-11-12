@@ -10,7 +10,7 @@ map<char, int> tav(string minta, string szoveg)
     {
         E[szoveg[i]] = minta.length();
     }
-    for (int i = 0; i < minta.length(); i++)
+    for (int i = 0; i < minta.length() - 1; i++)
     {
         E[minta[i]] = minta.length() - i - 1;
     }
