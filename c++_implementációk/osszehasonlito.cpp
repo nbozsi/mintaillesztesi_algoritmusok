@@ -3,9 +3,14 @@
 #include "brute_force.h"
 #include "Horspool.h"
 #include "KMP.h"
+
 using namespace std;
 using namespace std::chrono;
-// TODO wrapper function az időméréshez
+
+void timeit(int (*func)(string, string, vector<int>), string minta, string szoveg, vector<int> P); // function overloading, hogy mindre működjön
+void timeit(int (*func)(string, string, map<char, int>), string minta, string szoveg, map<char, int> tavok);
+void timeit(int (*func)(string, string), string minta, string szoveg);
+
 int main()
 {
     string minta; // beolvasás
@@ -13,31 +18,51 @@ int main()
     cin >> minta;
     cin >> szoveg;
 
-    vector<int> P = labfej(minta);
+    vector<int> P = labfej(minta); // előfeldolgozás
+    map tavok = tav(minta, szoveg);
+
     auto t1 = high_resolution_clock::now(); // kezdő időpont
-    int x = KMP(minta, szoveg, P);          //! a KMP a Horspool után futva mindig -1-t ad
+    int x = KMP(minta, szoveg, P);
     auto t2 = high_resolution_clock::now(); // végző időpont
     duration<double, std::milli> ms_double = t2 - t1;
     cout << "KMP"
          << "\t\t" << x << '\t' << ms_double.count() << endl;
 
-    t1 = high_resolution_clock::now(); //** időmérés ugyanúgy, mint az előbb
-    int y = brute_force(minta, szoveg);
-    t2 = high_resolution_clock::now();
-    ms_double = t2 - t1;
-    cout << "brute_force" << '\t' << y << '\t' << ms_double.count() << endl;
+    cout << "KMP" << '\t';
+    timeit(&KMP, minta, szoveg, P); //! valamiért a timeit-vel mindig -1-t ad eredményül
 
-    map tavok = tav(minta, szoveg); //** időmérés ugyanúgy, mint az előbb
-    t1 = high_resolution_clock::now();
-    int z = Horspool(minta, szoveg, tavok); //! A KMP után kell futnia
-    t2 = high_resolution_clock::now();
-    ms_double = t2 - t1;
-    cout << "Horspool" << '\t' << z << '\t' << ms_double.count() << endl;
+    cout << "brute_force" << '\t';
+    timeit(&brute_force, minta, szoveg);
+
+    cout << "Horspool" << '\t';
+    timeit(&Horspool, minta, szoveg, tavok);
+
     return 0;
 }
-
-template <typename Function>
-void timeit(string title, Function func) //? hogy lehet különbőző argumentumokat adni a belső függvénynek
+void timeit(int (*func)(string, string, vector<int>), string minta, string szoveg, vector<int> P) //? hogy lehet különbőző argumentumokat adni a belső függvénynek
 {
-    func(title);
+    int pos;
+    auto t1 = high_resolution_clock::now(); // kezdő időpont
+    pos = func(minta, szoveg, P);
+    auto t2 = high_resolution_clock::now(); // végző időpont
+    duration<double, std::milli> ms_double = t2 - t1;
+    cout << pos << '\t' << ms_double.count() << endl;
+}
+void timeit(int (*func)(string, string, map<char, int>), string minta, string szoveg, map<char, int> tavok)
+{
+    int pos;
+    auto t1 = high_resolution_clock::now();
+    pos = func(minta, szoveg, tavok);
+    auto t2 = high_resolution_clock::now();
+    duration<double, std::milli> ms_double = t2 - t1;
+    cout << pos << '\t' << ms_double.count() << endl;
+}
+void timeit(int (*func)(string, string), string minta, string szoveg)
+{
+    int pos;
+    auto t1 = high_resolution_clock::now();
+    pos = func(minta, szoveg);
+    auto t2 = high_resolution_clock::now();
+    duration<double, std::milli> ms_double = t2 - t1;
+    cout << pos << '\t' << ms_double.count() << endl;
 }
