@@ -21,15 +21,14 @@ int main()
     vector<int> P = labfej(minta); // előfeldolgozás
     map tavok = tav(minta, szoveg);
 
-    cout << "KMP\t\t";
-    timeit(&KMP, minta, szoveg, P);
-
     cout << "brute_force" << '\t';
     timeit(&brute_force, minta, szoveg);
 
     cout << "Horspool" << '\t';
     timeit(&Horspool, minta, szoveg, tavok);
 
+    cout << "KMP\t\t";
+    timeit(&KMP, minta, szoveg, P);
     return 0;
 }
 
