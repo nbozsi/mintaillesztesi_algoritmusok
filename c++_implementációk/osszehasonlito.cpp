@@ -21,15 +21,8 @@ int main()
     vector<int> P = labfej(minta); // előfeldolgozás
     map tavok = tav(minta, szoveg);
 
-    auto t1 = high_resolution_clock::now(); // kezdő időpont
-    int x = KMP(minta, szoveg, P);
-    auto t2 = high_resolution_clock::now(); // végző időpont
-    duration<double, std::milli> ms_double = t2 - t1;
-    cout << "KMP"
-         << "\t\t" << x << '\t' << ms_double.count() << endl;
-
-    cout << "KMP" << '\t';
-    timeit(&KMP, minta, szoveg, P); //! valamiért a timeit-vel mindig -1-t ad eredményül
+    cout << "KMP\t\t";
+    timeit(&KMP, minta, szoveg, P);
 
     cout << "brute_force" << '\t';
     timeit(&brute_force, minta, szoveg);
@@ -39,6 +32,7 @@ int main()
 
     return 0;
 }
+
 void timeit(int (*func)(string, string, vector<int>), string minta, string szoveg, vector<int> P) //? hogy lehet különbőző argumentumokat adni a belső függvénynek
 {
     int pos;
