@@ -27,7 +27,8 @@ vector<int> labfej(string minta)
 }
 int KMP(string minta, string szoveg, vector<int> P)
 {
-    int i, j = 0;
+    int i = 0;
+    int j = 0;
     while (i + j < szoveg.length())
     {
         if (j == minta.length())
