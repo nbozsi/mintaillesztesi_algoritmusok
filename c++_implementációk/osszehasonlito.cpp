@@ -32,7 +32,7 @@ int main()
     return 0;
 }
 
-void timeit(int (*func)(string, string, vector<int>), string minta, string szoveg, vector<int> P) //? hogy lehet különbőző argumentumokat adni a belső függvénynek
+void timeit(int (*func)(string, string, vector<int>), string minta, string szoveg, vector<int> P)
 {
     int pos;
     auto t1 = high_resolution_clock::now(); // kezdő időpont
