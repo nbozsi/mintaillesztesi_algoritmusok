@@ -3,6 +3,7 @@
 #include "brute_force.h"
 #include "Horspool.h"
 #include "KMP.h"
+#include "RabinKarp.h"
 
 using namespace std;
 using namespace std::chrono;
@@ -20,6 +21,7 @@ int main()
 
     vector<int> P = labfej(minta); // előfeldolgozás
     map tavok = tav(minta, szoveg);
+    map betuertek = charvalue(szoveg);
 
     cout << "brute_force" << '\t';
     timeit(&brute_force, minta, szoveg);
@@ -29,6 +31,10 @@ int main()
 
     cout << "KMP\t\t";
     timeit(&KMP, minta, szoveg, P);
+
+    cout << "Rabin-Karp\t";
+    timeit(&RabinKarp, minta, szoveg, betuertek);
+
     return 0;
 }
 
