@@ -21,8 +21,8 @@ int RabinKarp(string minta, string szoveg, map<char, int> E)
     int alap = E.size() + 1; // szamrendszer alapszama
     int M = 1000000007;      // ez egy nagyon nagy prímszám
     int maxh = 1;
-    int mintahash = 0;
-    int vizsgalthash = 0;
+    long long int mintahash = 0;
+    long long int vizsgalthash = 0;
     for (int i = 0; i < minta.length(); i++)
     {
         mintahash = (mintahash * alap + E[minta[i]]) % M;        // minta hashének kiszámítása
