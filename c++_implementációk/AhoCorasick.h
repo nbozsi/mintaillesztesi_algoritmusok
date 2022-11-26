@@ -47,7 +47,6 @@ void hibael_kereses(vector<Node *> szint, vector<Node *> szint_szulo)
     Node *helyzet = nullptr;
     for (int i = 0; i < szint.size(); i++)
     {
-        // cout << szint[i]->betu;
         for (const auto &[key, value] : szint[i]->gyerek) // következő szintbe berakjuk a az ezen a szinten lévők gyerekeit
         {
             kovetkezo.push_back(value);
@@ -59,7 +58,7 @@ void hibael_kereses(vector<Node *> szint, vector<Node *> szint_szulo)
         }
         else
         {
-            helyzet = szint_szulo[i]->hiba; // addig lépkedünk amígnem tudunk egy valid faágon lépni
+            helyzet = szint_szulo[i]->hiba; // addig lépkedünk amíg nem tudunk egy valid faágon lépni
             while (helyzet->gyerek.find(szint[i]->betu) == helyzet->gyerek.end() && helyzet != (helyzet->hiba))
             {
                 helyzet = helyzet->hiba;
@@ -67,7 +66,7 @@ void hibael_kereses(vector<Node *> szint, vector<Node *> szint_szulo)
             szint[i]->hiba = helyzet->lepes(szint[i]->betu);
         }
     }
-    if (kovetkezo.empty() == false)
+    if (kovetkezo.empty() == false) // rekurzívan meghívjuk a következő szintre is
     {
         hibael_kereses(kovetkezo, kovetkezo_szulo);
     }
@@ -81,12 +80,10 @@ void AhoCorasick(string szoveg, Node *gyoker)
         {
             cout << helyzet->szo_veg << " megjelenik " << i - helyzet->szo_veg.length() << "-tol " << i << "-ig.\n";
         }
-        if (helyzet->gyerek.find(szoveg[i]) == helyzet->gyerek.end() && helyzet != gyoker)
+        if (helyzet->gyerek.find(szoveg[i]) == helyzet->gyerek.end() && helyzet != gyoker) // ha hibaélen lépünk akkor továbbra is az eddig vizsgált betűvel megyünk tovább, kivéve ha a gyökérben loopolunk
         {
             i--;
         }
         helyzet = helyzet->lepes(szoveg[i]);
-
-        // cout << helyzet->betu;
     }
 }
