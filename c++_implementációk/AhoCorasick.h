@@ -39,13 +39,9 @@ Node *epites(string mintak[], int n)
 }
 void hibael_kereses(vector<Node *> szint, vector<Node *> szint_szulo)
 {
-    /*for (int i = 0; i < szint.size(); i++)
-    {
-        cout << szint[i]->betu << '-' << szint_szulo[i]->betu << ' ';
-    }*/
     vector<Node *> kovetkezo = {};
     vector<Node *> kovetkezo_szulo = {};
-    Node *helyzet;
+    Node *helyzet = nullptr;
     for (int i = 0; i < szint.size(); i++)
     {
         cout << szint[i]->betu;
@@ -54,18 +50,19 @@ void hibael_kereses(vector<Node *> szint, vector<Node *> szint_szulo)
             kovetkezo.push_back(value);
             kovetkezo_szulo.push_back(szint[i]);
         }
-        helyzet = szint_szulo[i]->hiba; // addig lépkedünk amígnem tudunk egy valid faágon lépni
-        cout << "\tszulo: " << szint_szulo[i]->betu;
-        cout << "\tszulo hibaja: " << szint_szulo[i]->hiba->betu << '\t';
-        while (helyzet->gyerek.find(szint[i]->betu) == helyzet->gyerek.end() && helyzet != helyzet->hiba)
+        if (szint_szulo[i]->hiba == szint_szulo[i])
         {
-            cout << "i";
-            helyzet = helyzet->hiba;
+            szint[i]->hiba = szint_szulo[i];
         }
-        cout << "\thelyzet: " << helyzet->betu << "\thelyzet lepese: " << helyzet->lepes(szint[i]->betu)->betu;
-        szint[i]->hiba = helyzet->lepes(szint[i]->betu);
-        cout << "\thiba: " << szint[i]->hiba->betu << endl;
-        // cout << szint[i]->hiba->betu;
+        else
+        {
+            helyzet = szint_szulo[i]->hiba; // addig lépkedünk amígnem tudunk egy valid faágon lépni
+            while (helyzet->gyerek.find(szint[i]->betu) == helyzet->gyerek.end() && helyzet != (helyzet->hiba))
+            {
+                helyzet = helyzet->hiba;
+            }
+            szint[i]->hiba = helyzet->lepes(szint[i]->betu);
+        }
     }
     if (kovetkezo.empty() == false)
     {
