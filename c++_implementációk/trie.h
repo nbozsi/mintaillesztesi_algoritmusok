@@ -1,6 +1,6 @@
 #include <map>
 using namespace std;
-// TODO failure élek gyors létrehozása
+// TODO hiba élek gyors létrehozása
 class Node
 {
 public:
@@ -24,6 +24,7 @@ Node::Node()
 {
     betu = '.';
     szoveg = false;
+    hiba = this;
 }
 Node *Node::lepes(char b)
 {
