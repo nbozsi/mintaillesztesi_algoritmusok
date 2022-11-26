@@ -4,26 +4,24 @@ using namespace std;
 class Node
 {
 public:
-    Node(char value, bool veg);
+    Node(char value);
     Node();
     // ÁLLANDOK
     char betu;
-    bool szoveg;
+    string szo_veg = "";
     map<char, Node *> gyerek;
     Node *hiba = nullptr;
     // FÜGGVÉNYEK
     Node *lepes(char b);
 };
 
-Node::Node(char value, bool veg)
+Node::Node(char value)
 {
     betu = value;
-    szoveg = veg;
 }
 Node::Node()
 {
     betu = '.';
-    szoveg = false;
     hiba = this;
 }
 Node *Node::lepes(char b)
