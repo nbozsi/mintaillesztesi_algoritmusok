@@ -10,7 +10,7 @@ public:
     char betu;
     bool szoveg;
     map<char, Node *> gyerek;
-    Node *hiba;
+    Node *hiba = nullptr;
     // FÜGGVÉNYEK
     Node *lepes(char b);
 };
@@ -30,7 +30,7 @@ Node *Node::lepes(char b)
 {
     if (gyerek.find(b) == gyerek.end())
     {
-        return gyerek[b];
+        return hiba;
     }
-    return hiba;
+    return gyerek[b];
 }
