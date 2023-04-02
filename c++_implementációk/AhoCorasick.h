@@ -78,7 +78,7 @@ void AhoCorasick(string szoveg, Node *gyoker)
     {
         if (helyzet->szo_veg.length() > 0)
         {
-            cout << helyzet->szo_veg << " megjelenik " << i - helyzet->szo_veg.length() << "-tol " << i << "-ig.\n";
+            std::cout << helyzet->szo_veg << " megjelenik " << i - helyzet->szo_veg.length() << "-tol " << i << "-ig.\n";
         }
         if (helyzet->gyerek.find(szoveg[i]) == helyzet->gyerek.end() && helyzet != gyoker) // ha hibaélen lépünk akkor továbbra is az eddig vizsgált betűvel megyünk tovább, kivéve ha a gyökérben loopolunk
         {
