@@ -22,18 +22,19 @@ int Levenshtein_tavolsag(string s, string t)
 
         for (int j = 0; j < t.length(); j++)
         {
-            torles_ar = utolso[j + 1] + 1; // mivel csak torlunk egyet az eggyel hosszabb kezdőszeletből
-            beszuras_ar = aktualis[j] + 1; // mivel csak hozzáadunk egy betűt az eggyel rövidebb kezdőszelethez
             if (s[i] == t[j])
             {
                 atiras_ar = utolso[j]; // mivel nem kell átírni kezdőszelet legutolsó betűjét, ezért annyi mint az eggyel rövidebb kezdőszeletek távolsága
+                aktualis[j + 1] = atiras_ar;
             }
             else
             {
+                torles_ar = utolso[j + 1] + 1; // mivel csak torlunk egyet az eggyel hosszabb kezdőszeletből
+                beszuras_ar = aktualis[j] + 1; // mivel csak hozzáadunk egy betűt az eggyel rövidebb kezdőszelethez
+
                 atiras_ar = utolso[j] + 1; // mivel át kell írni a kezdőszelet legutolsó betűjét
+                aktualis[j + 1] = min(torles_ar, min(beszuras_ar, atiras_ar));
             }
-            int mizu = min(torles_ar, min(beszuras_ar, atiras_ar));
-            aktualis[j + 1] = mizu;
         }
         for (int j = 0; j < t.length() + 1; j++)
         {
