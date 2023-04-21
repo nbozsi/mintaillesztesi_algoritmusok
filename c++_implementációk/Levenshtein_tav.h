@@ -1,4 +1,5 @@
 #include <iostream>
+#include <vector>
 
 using namespace std;
 
@@ -6,8 +7,8 @@ int Levenshtein_tavolsag(string s, string t)
 {
     /* dinamikus programozással, n. sor m. hely tartalmazza az n, m hosszú kezdőszeletek levenshtein tavolságát,
         de csak két sorát tároljuk a mátrixnak, mivel nincs többre szükség*/
-    int utolso[t.length() + 1];
-    int aktualis[t.length() + 1];
+    vector<int> utolso(t.length() + 1);
+    vector<int> aktualis(t.length() + 1);
 
     for (int i = 0; i < t.length() + 1; i++)
     {
@@ -24,8 +25,7 @@ int Levenshtein_tavolsag(string s, string t)
         {
             if (s[i] == t[j])
             {
-                atiras_ar = utolso[j]; // mivel nem kell átírni kezdőszelet legutolsó betűjét, ezért annyi mint az eggyel rövidebb kezdőszeletek távolsága
-                aktualis[j + 1] = atiras_ar;
+                aktualis[j + 1] = utolso[j]; // mivel nem kell átírni kezdőszelet legutolsó betűjét, ezért annyi mint az eggyel rövidebb kezdőszeletek távolsága
             }
             else
             {
