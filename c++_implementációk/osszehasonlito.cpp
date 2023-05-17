@@ -12,12 +12,10 @@ void timeit(int (*func)(string, string, vector<int>), string minta, string szove
 void timeit(int (*func)(string, string, map<char, int>), string minta, string szoveg, map<char, int> tavok, int);
 void timeit(int (*func)(string, string), string minta, string szoveg, int);
 
-int main()
+int main(int argc, char *argv[])
 {
-    string minta; // beolvasás
-    string szoveg;
-    cin >> minta;
-    cin >> szoveg;
+    string minta(argv[1]); // beolvasás
+    string szoveg(argv[2]);
     int probak = 20;
 
     vector<int> P = labfej(minta); // előfeldolgozás
