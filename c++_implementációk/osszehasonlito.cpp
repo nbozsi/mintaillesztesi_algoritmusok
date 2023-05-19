@@ -28,10 +28,10 @@ int main(int argc, char *argv[])
     cout << "Horspool" << '\t';
     timeit(&Horspool, minta, szoveg, tavok, probak);
 
-    cout << "KMP\t\t";
+    cout << "KMP" << '\t';
     timeit(&KMP, minta, szoveg, P, probak);
 
-    cout << "Rabin-Karp\t";
+    cout << "Rabin-Karp" << '\t';
     timeit(&RabinKarp, minta, szoveg, betuertek, probak);
 
     return 0;
