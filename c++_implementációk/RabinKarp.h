@@ -1,6 +1,7 @@
 #include <iostream>
 #include <map>
 using namespace std;
+
 map<char, int> charvalue(string szoveg)
 {
     map<char, int> E;
@@ -30,7 +31,6 @@ int RabinKarp(string minta, string szoveg, map<char, int> E)
         maxh = (maxh * alap);                                    // legnagyobb helyiérték kiszámítása
     }
     maxh = (maxh / alap) % M;
-    // cout << mintahash << " " << maxh << endl;
     if (mintahash == vizsgalthash)
     {
         return 0; // azaz a szoveg a mintával kezdődik
@@ -45,6 +45,5 @@ int RabinKarp(string minta, string szoveg, map<char, int> E)
             return i;
         }
     }
-    // cout << vizsgalthash;
     return -1;
 }
