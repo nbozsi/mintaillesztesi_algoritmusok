@@ -71,14 +71,16 @@ void hibael_kereses(vector<Node *> szint, vector<Node *> szint_szulo)
         hibael_kereses(kovetkezo, kovetkezo_szulo);
     }
 }
-void AhoCorasick(string szoveg, Node *gyoker)
+vector<int> AhoCorasick(string szoveg, Node *gyoker)
 {
+    vector<int> elofordulasok = {};
     Node *helyzet = gyoker;
     for (int i = 0; i < szoveg.length(); i++)
     {
         if (helyzet->szo_veg.length() > 0)
         {
-            std::cout << helyzet->szo_veg << " megjelenik " << i - helyzet->szo_veg.length() << "-tol " << i << "-ig.\n";
+            // std::cout << helyzet->szo_veg << " megjelenik " << i - helyzet->szo_veg.length() << "-tol " << i << "-ig.\n";
+            elofordulasok.push_back(i - helyzet->szo_veg.length());
         }
         if (helyzet->gyerek.find(szoveg[i]) == helyzet->gyerek.end() && helyzet != gyoker) // ha hibaélen lépünk akkor továbbra is az eddig vizsgált betűvel megyünk tovább, kivéve ha a gyökérben loopolunk
         {
@@ -86,4 +88,5 @@ void AhoCorasick(string szoveg, Node *gyoker)
         }
         helyzet = helyzet->lepes(szoveg[i]);
     }
+    return elofordulasok;
 }
