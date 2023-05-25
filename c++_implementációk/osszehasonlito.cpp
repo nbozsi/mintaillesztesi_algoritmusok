@@ -16,7 +16,7 @@ int main(int argc, char *argv[])
 {
     string minta(argv[1]); // beolvasás
     string szoveg(argv[2]);
-    int probak = 20;
+    int probak = 10;
 
     vector<int> P = labfej(minta); // előfeldolgozás
     map tavok = tav(minta, szoveg);
