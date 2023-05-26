@@ -9,11 +9,11 @@
 using namespace std;
 using namespace std::chrono;
 
-void timeit(vector<int> (*func)(string, string, vector<int>), vector<int> (*func2)(string), string minta[], string szoveg, int, int);               // KMP
-void timeit(vector<int> (*func)(string, string, map<char, int>), map<char, int> (*func2)(string), string minta[], string szoveg, int, int);         // Rabin-Karp
-void timeit(vector<int> (*func)(string, string, map<char, int>), map<char, int> (*func2)(string, string), string minta[], string szoveg, int, int); // Horspool
-void timeit(vector<int> (*func)(string, string), string minta[], string szoveg, int, int);                                                          // brute_force
-void timeit(vector<int> (*func)(string, Node *), string szoveg, Node *gyoker, int);                                                                 // aho-corasick
+void timeit(vector<int> (*func)(string, string, vector<int>), vector<int> (*func2)(string), string minta[], string szoveg, int, int);                                   // KMP
+void timeit(vector<int> (*func)(string, string, unordered_map<char, int>), unordered_map<char, int> (*func2)(string), string minta[], string szoveg, int, int);         // Rabin-Karp
+void timeit(vector<int> (*func)(string, string, unordered_map<char, int>), unordered_map<char, int> (*func2)(string, string), string minta[], string szoveg, int, int); // Horspool
+void timeit(vector<int> (*func)(string, string), string minta[], string szoveg, int, int);                                                                              // brute_force
+void timeit(vector<int> (*func)(string, Node *), string szoveg, Node *gyoker, int);                                                                                     // aho-corasick
 
 int main(int argc, char *argv[])
 {
@@ -78,13 +78,13 @@ void timeit(vector<int> (*func)(string, string, vector<int>), vector<int> (*func
     }
     cout << pos.back() << '\t' << sum / n << endl;
 }
-void timeit(vector<int> (*func)(string, string, map<char, int>), map<char, int> (*func2)(string), string minta[], string szoveg, int tombmeret, int n)
+void timeit(vector<int> (*func)(string, string, unordered_map<char, int>), unordered_map<char, int> (*func2)(string), string minta[], string szoveg, int tombmeret, int n)
 {
     vector<int> pos;
     double sum = 0;
     for (int j = 0; j < tombmeret; j++)
     {
-        map<char, int> E = func2(minta[j]);
+        unordered_map<char, int> E = func2(minta[j]);
         for (int i = 0; i < n; i++)
         {
             auto t1 = high_resolution_clock::now();
@@ -96,13 +96,13 @@ void timeit(vector<int> (*func)(string, string, map<char, int>), map<char, int> 
     }
     cout << pos.back() << '\t' << sum / n << endl;
 }
-void timeit(vector<int> (*func)(string, string, map<char, int>), map<char, int> (*func2)(string, string), string minta[], string szoveg, int tombmeret, int n)
+void timeit(vector<int> (*func)(string, string, unordered_map<char, int>), unordered_map<char, int> (*func2)(string, string), string minta[], string szoveg, int tombmeret, int n)
 {
     vector<int> pos;
     double sum = 0;
     for (int j = 0; j < tombmeret; j++)
     {
-        map<char, int> tavok = func2(minta[j], szoveg);
+        unordered_map<char, int> tavok = func2(minta[j], szoveg);
         for (int i = 0; i < n; i++)
         {
             auto t1 = high_resolution_clock::now();
