@@ -28,9 +28,11 @@ int RabinKarp(string minta, string szoveg, map<char, int> E)
     {
         mintahash = (mintahash * alap + E[minta[i]]) % M;        // minta hashének kiszámítása
         vizsgalthash = (vizsgalthash * alap + E[szoveg[i]]) % M; // szoveg első substringének kiszámítása
-        maxh = (maxh * alap);                                    // legnagyobb helyiérték kiszámítása
     }
-    maxh = (maxh / alap) % M;
+    for (int i = 0; i < minta.length() - 1; i++)
+    {
+        maxh = (maxh * alap) % M; // legnagyobb helyiérték kiszámítása
+    }
     if (mintahash == vizsgalthash)
     {
         return 0; // azaz a szoveg a mintával kezdődik
