@@ -1,11 +1,11 @@
 #include <iostream>
-#include <map>
+#include <unordered_map>
 
 using namespace std;
 
-map<char, int> tav(string minta, string szoveg)
+unordered_map<char, int> tav(string minta, string szoveg)
 {
-    map<char, int> E;
+    unordered_map<char, int> E;
     for (int i = 0; i < szoveg.length(); i++)
     {
         E[szoveg[i]] = minta.length();
@@ -16,7 +16,7 @@ map<char, int> tav(string minta, string szoveg)
     }
     return E;
 }
-vector<int> Horspool(string minta, string szoveg, map<char, int> E)
+vector<int> Horspool(string minta, string szoveg, unordered_map<char, int> E)
 {
     int j = minta.length() - 1;
     bool jo;

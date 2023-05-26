@@ -1,12 +1,13 @@
 #include <iostream>
-#include <map>
+#include <unordered_map>
+#include <vector>
 using namespace std;
 
-map<char, int> charvalue(string szoveg)
+unordered_map<char, int> charvalue(string szoveg)
 {
-    map<char, int> E;
+    unordered_map<char, int> E;
     int next = 1;
-    pair<map<char, int>::iterator, bool> ret;
+    pair<unordered_map<char, int>::iterator, bool> ret;
     for (int i = 0; i < szoveg.length(); i++)
     {
         ret = E.insert({szoveg[i], next});
@@ -17,7 +18,11 @@ map<char, int> charvalue(string szoveg)
     }
     return E;
 }
-vector<int> RabinKarp(string minta, string szoveg, map<char, int> E)
+int val(char s)
+{
+    return s - 'A';
+}
+vector<int> RabinKarp(string minta, string szoveg, unordered_map<char, int> E)
 {
     vector<int> talalatok;
     int alap = E.size() + 1; // szamrendszer alapszama
