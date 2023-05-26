@@ -39,8 +39,11 @@ int RabinKarp(string minta, string szoveg, map<char, int> E)
     }
     for (int i = 1; i <= szoveg.length() - minta.length(); i++)
     {
-        // cout << vizsgalthash << " ";
-        vizsgalthash = (vizsgalthash - E[szoveg[i - 1]] * maxh) % M;                  // betű eltávolítása az elejéről (hozzáadunk M-t hogy pozitív maradék legyen)
+        vizsgalthash = (vizsgalthash - E[szoveg[i - 1]] * maxh) % M; // betű eltávolítása az elejéről (hozzáadunk M-t hogy pozitív maradék legyen)
+        if (vizsgalthash < 0)                                        // negatív maraékot pozitívra hozzuk
+        {
+            vizsgalthash = vizsgalthash + M;
+        }
         vizsgalthash = (vizsgalthash * alap + E[szoveg[i + minta.length() - 1]]) % M; // betű hozzáadása a végéhez
         if (vizsgalthash == mintahash)
         {
