@@ -5,7 +5,7 @@ using namespace std;
 
 vector<int> brute_force(string minta, string szoveg)
 {
-    vector<int> talalatok = {};
+    vector<int> talalatok;
     bool jo;
     for (int i = 0; i <= szoveg.length() - minta.length(); i++)
     {

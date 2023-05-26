@@ -24,12 +24,15 @@ int main(int argc, char *argv[])
 
     cout << "brute_force" << '\t';
     timeit(&brute_force, minta, szoveg, probak);
+    cout << '\n';
 
     cout << "Horspool" << '\t';
     timeit(&Horspool, minta, szoveg, tavok, probak);
+    cout << '\n';
 
     cout << "KMP" << '\t';
     timeit(&KMP, minta, szoveg, P, probak);
+    cout << '\n';
 
     cout << "Rabin-Karp" << '\t';
     timeit(&RabinKarp, minta, szoveg, betuertek, probak);
@@ -49,7 +52,12 @@ void timeit(vector<int> (*func)(string, string, vector<int>), string minta, stri
         duration<double, std::milli> ms_double = t2 - t1;
         sum = sum + ms_double.count();
     }
-    cout << pos.back() << '\t' << sum / n << endl;
+    int r = -1;
+    if (!pos.empty()) // ellenőrizzük, hogy van- egyáltalán találat
+    {
+        r = pos.back();
+    }
+    cout << r << '\t' << sum / n;
 }
 void timeit(vector<int> (*func)(string, string, unordered_map<char, int>), string minta, string szoveg, unordered_map<char, int> tavok, int n)
 {
@@ -63,7 +71,12 @@ void timeit(vector<int> (*func)(string, string, unordered_map<char, int>), strin
         duration<double, std::milli> ms_double = t2 - t1;
         sum = sum + ms_double.count();
     }
-    cout << pos.back() << '\t' << sum / n << endl;
+    int r = -1;
+    if (!pos.empty()) // ellenőrizzük, hogy van- egyáltalán találat
+    {
+        r = pos.back();
+    }
+    cout << r << '\t' << sum / n;
 }
 void timeit(vector<int> (*func)(string, string), string minta, string szoveg, int n)
 {
@@ -77,5 +90,10 @@ void timeit(vector<int> (*func)(string, string), string minta, string szoveg, in
         duration<double, std::milli> ms_double = t2 - t1;
         sum = sum + ms_double.count();
     }
-    cout << pos.back() << '\t' << sum / n << endl;
+    int r = -1;
+    if (!pos.empty()) // ellenőrizzük, hogy van- egyáltalán találat
+    {
+        r = pos.back();
+    }
+    cout << r << '\t' << sum / n;
 }
