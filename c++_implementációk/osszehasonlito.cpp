@@ -9,7 +9,7 @@ using namespace std;
 using namespace std::chrono;
 
 void timeit(vector<int> (*func)(string, string, vector<int>), string minta, string szoveg, vector<int> P, int); // function overloading, hogy mindre működjön
-void timeit(vector<int> (*func)(string, string, map<char, int>), string minta, string szoveg, map<char, int> tavok, int);
+void timeit(vector<int> (*func)(string, string, unordered_map<char, int>), string minta, string szoveg, unordered_map<char, int> tavok, int);
 void timeit(vector<int> (*func)(string, string), string minta, string szoveg, int);
 
 int main(int argc, char *argv[])
@@ -19,8 +19,8 @@ int main(int argc, char *argv[])
     int probak = 10;
 
     vector<int> P = labfej(minta); // előfeldolgozás
-    map tavok = tav(minta, szoveg);
-    map betuertek = charvalue(szoveg);
+    unordered_map tavok = tav(minta, szoveg);
+    unordered_map betuertek = charvalue(szoveg);
 
     cout << "brute_force" << '\t';
     timeit(&brute_force, minta, szoveg, probak);
@@ -51,7 +51,7 @@ void timeit(vector<int> (*func)(string, string, vector<int>), string minta, stri
     }
     cout << pos.back() << '\t' << sum / n << endl;
 }
-void timeit(vector<int> (*func)(string, string, map<char, int>), string minta, string szoveg, map<char, int> tavok, int n)
+void timeit(vector<int> (*func)(string, string, unordered_map<char, int>), string minta, string szoveg, unordered_map<char, int> tavok, int n)
 {
     vector<int> pos;
     double sum = 0;
