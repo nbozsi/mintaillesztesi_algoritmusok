@@ -1,9 +1,11 @@
 #include <iostream>
+#include <vector>
 
 using namespace std;
 
-int brute_force(string minta, string szoveg)
+vector<int> brute_force(string minta, string szoveg)
 {
+    vector<int> talalatok = {};
     bool jo;
     for (int i = 0; i <= szoveg.length() - minta.length(); i++)
     {
@@ -18,8 +20,8 @@ int brute_force(string minta, string szoveg)
         }
         if (jo)
         {
-            return i;
+            talalatok.push_back(i);
         }
     }
-    return -1;
+    return talalatok;
 }
