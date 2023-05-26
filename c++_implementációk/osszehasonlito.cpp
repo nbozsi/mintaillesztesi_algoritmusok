@@ -8,9 +8,9 @@
 using namespace std;
 using namespace std::chrono;
 
-void timeit(int (*func)(string, string, vector<int>), string minta, string szoveg, vector<int> P, int); // function overloading, hogy mindre működjön
-void timeit(int (*func)(string, string, map<char, int>), string minta, string szoveg, map<char, int> tavok, int);
-void timeit(int (*func)(string, string), string minta, string szoveg, int);
+void timeit(vector<int> (*func)(string, string, vector<int>), string minta, string szoveg, vector<int> P, int); // function overloading, hogy mindre működjön
+void timeit(vector<int> (*func)(string, string, map<char, int>), string minta, string szoveg, map<char, int> tavok, int);
+void timeit(vector<int> (*func)(string, string), string minta, string szoveg, int);
 
 int main(int argc, char *argv[])
 {
@@ -37,9 +37,9 @@ int main(int argc, char *argv[])
     return 0;
 }
 
-void timeit(int (*func)(string, string, vector<int>), string minta, string szoveg, vector<int> P, int n)
+void timeit(vector<int> (*func)(string, string, vector<int>), string minta, string szoveg, vector<int> P, int n)
 {
-    int pos;
+    vector<int> pos;
     double sum = 0;
     for (int i = 0; i < n; i++) // n-szer futtatjuk és a futásidők átlagát vesszük
     {
@@ -49,11 +49,11 @@ void timeit(int (*func)(string, string, vector<int>), string minta, string szove
         duration<double, std::milli> ms_double = t2 - t1;
         sum = sum + ms_double.count();
     }
-    cout << pos << '\t' << sum / n << endl;
+    cout << pos.back() << '\t' << sum / n << endl;
 }
-void timeit(int (*func)(string, string, map<char, int>), string minta, string szoveg, map<char, int> tavok, int n)
+void timeit(vector<int> (*func)(string, string, map<char, int>), string minta, string szoveg, map<char, int> tavok, int n)
 {
-    int pos;
+    vector<int> pos;
     double sum = 0;
     for (int i = 0; i < n; i++)
     {
@@ -63,11 +63,11 @@ void timeit(int (*func)(string, string, map<char, int>), string minta, string sz
         duration<double, std::milli> ms_double = t2 - t1;
         sum = sum + ms_double.count();
     }
-    cout << pos << '\t' << sum / n << endl;
+    cout << pos.back() << '\t' << sum / n << endl;
 }
-void timeit(int (*func)(string, string), string minta, string szoveg, int n)
+void timeit(vector<int> (*func)(string, string), string minta, string szoveg, int n)
 {
-    int pos;
+    vector<int> pos;
     double sum = 0;
     for (int i = 0; i < n; i++)
     {
@@ -77,5 +77,5 @@ void timeit(int (*func)(string, string), string minta, string szoveg, int n)
         duration<double, std::milli> ms_double = t2 - t1;
         sum = sum + ms_double.count();
     }
-    cout << pos << '\t' << sum / n << endl;
+    cout << pos.back() << '\t' << sum / n << endl;
 }

@@ -9,11 +9,11 @@
 using namespace std;
 using namespace std::chrono;
 
-void timeit(int (*func)(string, string, vector<int>), vector<int> (*func2)(string), string minta[], string szoveg, int, int);               // KMP
-void timeit(int (*func)(string, string, map<char, int>), map<char, int> (*func2)(string), string minta[], string szoveg, int, int);         // Rabin-Karp
-void timeit(int (*func)(string, string, map<char, int>), map<char, int> (*func2)(string, string), string minta[], string szoveg, int, int); // Horspool
-void timeit(int (*func)(string, string), string minta[], string szoveg, int, int);                                                          // brute_force
-void timeit(vector<int> (*func)(string, Node *), string szoveg, Node *gyoker, int);                                                         // aho-corasick
+void timeit(vector<int> (*func)(string, string, vector<int>), vector<int> (*func2)(string), string minta[], string szoveg, int, int);               // KMP
+void timeit(vector<int> (*func)(string, string, map<char, int>), map<char, int> (*func2)(string), string minta[], string szoveg, int, int);         // Rabin-Karp
+void timeit(vector<int> (*func)(string, string, map<char, int>), map<char, int> (*func2)(string, string), string minta[], string szoveg, int, int); // Horspool
+void timeit(vector<int> (*func)(string, string), string minta[], string szoveg, int, int);                                                          // brute_force
+void timeit(vector<int> (*func)(string, Node *), string szoveg, Node *gyoker, int);                                                                 // aho-corasick
 
 int main(int argc, char *argv[])
 {
@@ -60,9 +60,9 @@ void timeit(vector<int> (*func)(string, Node *), string szoveg, Node *gyoker, in
     }
     cout << pos.back() << '\t' << sum / n << endl;
 }
-void timeit(int (*func)(string, string, vector<int>), vector<int> (*func2)(string), string minta[], string szoveg, int tombmeret, int n)
+void timeit(vector<int> (*func)(string, string, vector<int>), vector<int> (*func2)(string), string minta[], string szoveg, int tombmeret, int n)
 {
-    int pos;
+    vector<int> pos;
     double sum = 0;
     for (int j = 0; j < tombmeret; j++)
     {
@@ -76,11 +76,11 @@ void timeit(int (*func)(string, string, vector<int>), vector<int> (*func2)(strin
             sum = sum + ms_double.count();
         }
     }
-    cout << pos << '\t' << sum / n << endl;
+    cout << pos.back() << '\t' << sum / n << endl;
 }
-void timeit(int (*func)(string, string, map<char, int>), map<char, int> (*func2)(string), string minta[], string szoveg, int tombmeret, int n)
+void timeit(vector<int> (*func)(string, string, map<char, int>), map<char, int> (*func2)(string), string minta[], string szoveg, int tombmeret, int n)
 {
-    int pos;
+    vector<int> pos;
     double sum = 0;
     for (int j = 0; j < tombmeret; j++)
     {
@@ -94,11 +94,11 @@ void timeit(int (*func)(string, string, map<char, int>), map<char, int> (*func2)
             sum = sum + ms_double.count();
         }
     }
-    cout << pos << '\t' << sum / n << endl;
+    cout << pos.back() << '\t' << sum / n << endl;
 }
-void timeit(int (*func)(string, string, map<char, int>), map<char, int> (*func2)(string, string), string minta[], string szoveg, int tombmeret, int n)
+void timeit(vector<int> (*func)(string, string, map<char, int>), map<char, int> (*func2)(string, string), string minta[], string szoveg, int tombmeret, int n)
 {
-    int pos;
+    vector<int> pos;
     double sum = 0;
     for (int j = 0; j < tombmeret; j++)
     {
@@ -112,11 +112,11 @@ void timeit(int (*func)(string, string, map<char, int>), map<char, int> (*func2)
             sum = sum + ms_double.count();
         }
     }
-    cout << pos << '\t' << sum / n << endl;
+    cout << pos.back() << '\t' << sum / n << endl;
 }
-void timeit(int (*func)(string, string), string minta[], string szoveg, int tombmeret, int n)
+void timeit(vector<int> (*func)(string, string), string minta[], string szoveg, int tombmeret, int n)
 {
-    int pos;
+    vector<int> pos;
     double sum = 0;
     for (int j = 0; j < tombmeret; j++)
     {
@@ -129,5 +129,5 @@ void timeit(int (*func)(string, string), string minta[], string szoveg, int tomb
             sum = sum + ms_double.count();
         }
     }
-    cout << pos << '\t' << sum / n << endl;
+    cout << pos.back() << '\t' << sum / n << endl;
 }
