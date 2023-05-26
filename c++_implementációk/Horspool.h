@@ -16,10 +16,11 @@ map<char, int> tav(string minta, string szoveg)
     }
     return E;
 }
-int Horspool(string minta, string szoveg, map<char, int> E)
+vector<int> Horspool(string minta, string szoveg, map<char, int> E)
 {
     int j = minta.length() - 1;
     bool jo;
+    vector<int> talalatok;
     while (j < szoveg.length())
     {
         if (szoveg[j] == minta.back())
@@ -35,10 +36,10 @@ int Horspool(string minta, string szoveg, map<char, int> E)
             }
             if (jo)
             {
-                return j - minta.length() + 1;
+                talalatok.push_back(j - minta.length() + 1);
             }
         }
         j = E[szoveg[j]] + j;
     }
-    return -1;
+    return talalatok;
 }

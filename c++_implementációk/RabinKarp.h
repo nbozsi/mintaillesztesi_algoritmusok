@@ -17,8 +17,9 @@ map<char, int> charvalue(string szoveg)
     }
     return E;
 }
-int RabinKarp(string minta, string szoveg, map<char, int> E)
+vector<int> RabinKarp(string minta, string szoveg, map<char, int> E)
 {
+    vector<int> talalatok;
     int alap = E.size() + 1; // szamrendszer alapszama
     int M = 1000000007;      // ez egy nagyon nagy prímszám
     int maxh = 1;
@@ -35,7 +36,7 @@ int RabinKarp(string minta, string szoveg, map<char, int> E)
     }
     if (mintahash == vizsgalthash)
     {
-        return 0; // azaz a szoveg a mintával kezdődik
+        talalatok.push_back(0); // azaz a szoveg a mintával kezdődik
     }
     for (int i = 1; i <= szoveg.length() - minta.length(); i++)
     {
@@ -47,8 +48,8 @@ int RabinKarp(string minta, string szoveg, map<char, int> E)
         vizsgalthash = (vizsgalthash * alap + E[szoveg[i + minta.length() - 1]]) % M; // betű hozzáadása a végéhez
         if (vizsgalthash == mintahash)
         {
-            return i;
+            talalatok.push_back(i);
         }
     }
-    return -1;
+    return talalatok;
 }

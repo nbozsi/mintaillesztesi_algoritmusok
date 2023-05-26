@@ -25,15 +25,16 @@ vector<int> labfej(string minta)
     }
     return P;
 }
-int KMP(string minta, string szoveg, vector<int> P)
+vector<int> KMP(string minta, string szoveg, vector<int> P)
 {
+    vector<int> talalatok;
     int i = 0;
     int j = 0;
     while (i + j < szoveg.length())
     {
         if (j == minta.length())
         {
-            return i;
+            talalatok.push_back(i);
         }
         if (szoveg[i + j] == minta[j])
         {
@@ -54,7 +55,7 @@ int KMP(string minta, string szoveg, vector<int> P)
     }
     if (j == minta.length())
     {
-        return i;
+        talalatok.push_back(i);
     }
-    return -1;
+    return talalatok;
 }
