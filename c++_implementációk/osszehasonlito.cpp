@@ -38,7 +38,7 @@ int main(int argc, char *argv[])
     cout << '\n';
 
     cout << "Rabin-Karp" << '\t';
-    timeit(&RabinKarp, minta, szoveg, y - x, x, probak);
+    timeit(&RabinKarp, minta, szoveg, y - x + 1, x, probak);
     return 0;
 }
 
@@ -54,12 +54,7 @@ void timeit(vector<int> (*func)(string, string, vector<int>), string minta, stri
         duration<double, std::milli> ms_double = t2 - t1;
         sum = sum + ms_double.count();
     }
-    int r = -1;
-    if (!pos.empty()) // ellenőrizzük, hogy van- egyáltalán találat
-    {
-        r = pos.back();
-    }
-    cout << r << '\t' << sum / n;
+    cout << pos.size() << '\t' << sum / n;
 }
 void timeit(vector<int> (*func)(string, string, unordered_map<char, int>), string minta, string szoveg, unordered_map<char, int> tavok, int n)
 {
@@ -73,12 +68,7 @@ void timeit(vector<int> (*func)(string, string, unordered_map<char, int>), strin
         duration<double, std::milli> ms_double = t2 - t1;
         sum = sum + ms_double.count();
     }
-    int r = -1;
-    if (!pos.empty()) // ellenőrizzük, hogy van- egyáltalán találat
-    {
-        r = pos.back();
-    }
-    cout << r << '\t' << sum / n;
+    cout << pos.size() << '\t' << sum / n;
 }
 void timeit(vector<int> (*func)(string, string), string minta, string szoveg, int n)
 {
@@ -92,12 +82,7 @@ void timeit(vector<int> (*func)(string, string), string minta, string szoveg, in
         duration<double, std::milli> ms_double = t2 - t1;
         sum = sum + ms_double.count();
     }
-    int r = -1;
-    if (!pos.empty()) // ellenőrizzük, hogy van- egyáltalán találat
-    {
-        r = pos.back();
-    }
-    cout << r << '\t' << sum / n;
+    cout << pos.size() << '\t' << sum / n;
 }
 void timeit(vector<int> (*func)(string, string, int, int), string minta, string szoveg, int alap, int val, int n)
 {
@@ -111,10 +96,5 @@ void timeit(vector<int> (*func)(string, string, int, int), string minta, string 
         duration<double, std::milli> ms_double = t2 - t1;
         sum = sum + ms_double.count();
     }
-    int r = -1;
-    if (!pos.empty()) // ellenőrizzük, hogy van- egyáltalán találat
-    {
-        r = pos.back();
-    }
-    cout << r << '\t' << sum / n;
+    cout << pos.size() << '\t' << sum / n;
 }
