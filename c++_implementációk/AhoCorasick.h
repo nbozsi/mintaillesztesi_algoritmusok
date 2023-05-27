@@ -75,6 +75,7 @@ vector<int> AhoCorasick(string szoveg, Node *gyoker)
 {
     vector<int> elofordulasok = {};
     Node *helyzet = gyoker;
+    Node *miz;
     for (int i = 0; i < szoveg.length(); i++)
     {
         if (helyzet->szo_veg.length() > 0)
@@ -82,11 +83,12 @@ vector<int> AhoCorasick(string szoveg, Node *gyoker)
             // std::cout << helyzet->szo_veg << " megjelenik " << i - helyzet->szo_veg.length() << "-tol " << i << "-ig.\n";
             elofordulasok.push_back(i - helyzet->szo_veg.length());
         }
-        helyzet = helyzet->lepes(szoveg[i]);
+        miz = helyzet->lepes(szoveg[i]);
         if (helyzet->gyerek.find(szoveg[i]) == helyzet->gyerek.end() && helyzet != gyoker) // ha hibaélen lépünk akkor továbbra is az eddig vizsgált betűvel megyünk tovább, kivéve ha a gyökérben loopolunk
         {
             i--;
         }
+        helyzet = miz;
     }
     return elofordulasok;
 }
