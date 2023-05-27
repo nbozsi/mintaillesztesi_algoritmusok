@@ -10,6 +10,7 @@ using namespace std::chrono;
 
 void timeit(vector<int> (*func)(string, string, vector<int>), string minta, string szoveg, vector<int> P, int); // function overloading, hogy mindre működjön
 void timeit(vector<int> (*func)(string, string, unordered_map<char, int>), string minta, string szoveg, unordered_map<char, int> tavok, int);
+void timeit(vector<int> (*func)(string, string, int, int), string minta, string szoveg, int alap, int val, int);
 void timeit(vector<int> (*func)(string, string), string minta, string szoveg, int);
 
 int main(int argc, char *argv[])
@@ -21,6 +22,8 @@ int main(int argc, char *argv[])
     vector<int> P = labfej(minta); // előfeldolgozás
     unordered_map tavok = tav(minta, szoveg);
     unordered_map betuertek = charvalue(szoveg);
+    int x, y;
+    val(minta + szoveg, &x, &y);
 
     cout << "brute_force" << '\t';
     timeit(&brute_force, minta, szoveg, probak);
@@ -35,8 +38,7 @@ int main(int argc, char *argv[])
     cout << '\n';
 
     cout << "Rabin-Karp" << '\t';
-    timeit(&RabinKarp, minta, szoveg, betuertek, probak);
-
+    timeit(&RabinKarp, minta, szoveg, y - x, x, probak);
     return 0;
 }
 
@@ -86,6 +88,25 @@ void timeit(vector<int> (*func)(string, string), string minta, string szoveg, in
     {
         auto t1 = high_resolution_clock::now();
         pos = func(minta, szoveg);
+        auto t2 = high_resolution_clock::now();
+        duration<double, std::milli> ms_double = t2 - t1;
+        sum = sum + ms_double.count();
+    }
+    int r = -1;
+    if (!pos.empty()) // ellenőrizzük, hogy van- egyáltalán találat
+    {
+        r = pos.back();
+    }
+    cout << r << '\t' << sum / n;
+}
+void timeit(vector<int> (*func)(string, string, int, int), string minta, string szoveg, int alap, int val, int n)
+{
+    vector<int> pos;
+    double sum = 0;
+    for (int i = 0; i < n; i++)
+    {
+        auto t1 = high_resolution_clock::now();
+        pos = func(minta, szoveg, alap, val);
         auto t2 = high_resolution_clock::now();
         duration<double, std::milli> ms_double = t2 - t1;
         sum = sum + ms_double.count();
