@@ -1,4 +1,4 @@
-#include <map>
+#include <unordered_map>
 using namespace std;
 // TODO hiba élek gyors létrehozása
 class Node
@@ -9,7 +9,7 @@ public:
     // ÁLLANDOK
     char betu;
     string szo_veg = "";
-    map<char, Node *> gyerek;
+    unordered_map<char, Node *> gyerek;
     Node *hiba = nullptr;
     // FÜGGVÉNYEK
     Node *lepes(char b);
