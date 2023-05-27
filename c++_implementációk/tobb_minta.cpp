@@ -10,7 +10,7 @@ using namespace std;
 using namespace std::chrono;
 
 void timeit(vector<int> (*func)(string, string, vector<int>), vector<int> (*func2)(string), string minta[], string szoveg, int, int);                                   // KMP
-void timeit(vector<int> (*func)(string, string, unordered_map<char, int>), unordered_map<char, int> (*func2)(string), string minta[], string szoveg, int, int);         // Rabin-Karp
+void timeit(vector<int> (*func)(string, string, int, int), void (*func2)(string, int *, int *), string minta[], string szoveg, int, int);                               // Rabin-Karp
 void timeit(vector<int> (*func)(string, string, unordered_map<char, int>), unordered_map<char, int> (*func2)(string, string), string minta[], string szoveg, int, int); // Horspool
 void timeit(vector<int> (*func)(string, string), string minta[], string szoveg, int, int);                                                                              // brute_force
 void timeit(vector<int> (*func)(string, Node *), string szoveg, Node *gyoker, int);                                                                                     // aho-corasick
@@ -38,7 +38,7 @@ int main(int argc, char *argv[])
     timeit(&KMP, &labfej, mintak, szoveg, argc - 2, probak);
 
     cout << "Rabin-Karp" << '\t';
-    timeit(&RabinKarp, &charvalue, mintak, szoveg, argc - 2, probak);
+    timeit(&RabinKarp, &val, mintak, szoveg, argc - 2, probak);
 
     cout << "Aho-Corasick" << '\t';
     timeit(&AhoCorasick, szoveg, gyok, probak);
@@ -78,17 +78,18 @@ void timeit(vector<int> (*func)(string, string, vector<int>), vector<int> (*func
     }
     cout << pos.back() << '\t' << sum / n << endl;
 }
-void timeit(vector<int> (*func)(string, string, unordered_map<char, int>), unordered_map<char, int> (*func2)(string), string minta[], string szoveg, int tombmeret, int n)
+void timeit(vector<int> (*func)(string, string, int, int), void (*func2)(string, int *, int *), string minta[], string szoveg, int tombmeret, int n)
 {
     vector<int> pos;
     double sum = 0;
+    int x, y;
     for (int j = 0; j < tombmeret; j++)
     {
-        unordered_map<char, int> E = func2(minta[j]);
+        func2(minta[j] + szoveg, &x, &y);
         for (int i = 0; i < n; i++)
         {
             auto t1 = high_resolution_clock::now();
-            pos = func(minta[j], szoveg, E);
+            pos = func(minta[j], szoveg, y - x + 1, x);
             auto t2 = high_resolution_clock::now();
             duration<double, std::milli> ms_double = t2 - t1;
             sum = sum + ms_double.count();
