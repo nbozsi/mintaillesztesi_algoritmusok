@@ -30,15 +30,19 @@ int main(int argc, char *argv[])
 
     cout << "brute_force" << '\t';
     timeit(&brute_force, mintak, szoveg, argc - 2, probak);
+    cout << '\n';
 
     cout << "Horspool" << '\t';
     timeit(&Horspool, &tav, mintak, szoveg, argc - 2, probak);
+    cout << '\n';
 
     cout << "KMP" << '\t';
     timeit(&KMP, &labfej, mintak, szoveg, argc - 2, probak);
+    cout << '\n';
 
     cout << "Rabin-Karp" << '\t';
     timeit(&RabinKarp, &val, mintak, szoveg, argc - 2, probak);
+    cout << '\n';
 
     cout << "Aho-Corasick" << '\t';
     timeit(&AhoCorasick, szoveg, gyok, probak);
@@ -58,7 +62,7 @@ void timeit(vector<int> (*func)(string, Node *), string szoveg, Node *gyoker, in
         duration<double, std::milli> ms_double = t2 - t1;
         sum = sum + ms_double.count();
     }
-    cout << pos.back() << '\t' << sum / n << endl;
+    cout << pos.back() << '\t' << sum / n;
 }
 void timeit(vector<int> (*func)(string, string, vector<int>), vector<int> (*func2)(string), string minta[], string szoveg, int tombmeret, int n)
 {
@@ -76,7 +80,7 @@ void timeit(vector<int> (*func)(string, string, vector<int>), vector<int> (*func
             sum = sum + ms_double.count();
         }
     }
-    cout << pos.back() << '\t' << sum / n << endl;
+    cout << pos.back() << '\t' << sum / n;
 }
 void timeit(vector<int> (*func)(string, string, int, int), void (*func2)(string, int *, int *), string minta[], string szoveg, int tombmeret, int n)
 {
@@ -95,7 +99,7 @@ void timeit(vector<int> (*func)(string, string, int, int), void (*func2)(string,
             sum = sum + ms_double.count();
         }
     }
-    cout << pos.back() << '\t' << sum / n << endl;
+    cout << pos.back() << '\t' << sum / n;
 }
 void timeit(vector<int> (*func)(string, string, unordered_map<char, int>), unordered_map<char, int> (*func2)(string, string), string minta[], string szoveg, int tombmeret, int n)
 {
@@ -113,7 +117,7 @@ void timeit(vector<int> (*func)(string, string, unordered_map<char, int>), unord
             sum = sum + ms_double.count();
         }
     }
-    cout << pos.back() << '\t' << sum / n << endl;
+    cout << pos.back() << '\t' << sum / n;
 }
 void timeit(vector<int> (*func)(string, string), string minta[], string szoveg, int tombmeret, int n)
 {
@@ -130,5 +134,5 @@ void timeit(vector<int> (*func)(string, string), string minta[], string szoveg, 
             sum = sum + ms_double.count();
         }
     }
-    cout << pos.back() << '\t' << sum / n << endl;
+    cout << pos.back() << '\t' << sum / n;
 }
