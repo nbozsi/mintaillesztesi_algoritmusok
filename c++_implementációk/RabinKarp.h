@@ -21,37 +21,18 @@ unordered_map<char, int> charvalue(string szoveg)
 }
 void val(string abc, int *min, int *max)
 {
-    vector<char> vesztesek;
-    vector<char> nyertesek;
+    *min = abc[0];
+    *max = abc[0];
     for (int i = 0; i < abc.length() - 1; i += 2)
     {
-        if (abc[i] < abc[i + 1])
+        if (abc[i] < *min)
         {
-            vesztesek.push_back(abc[i]);
-            nyertesek.push_back(abc[i + 1]);
+            *min = abc[i];
         }
-        else
+
+        if (abc[i] > *max)
         {
-            nyertesek.push_back(abc[i]);
-            vesztesek.push_back(abc[i + 1]);
-        }
-    }
-    if (abc.length() % 2 == 1)
-    {
-        vesztesek.push_back(abc.back());
-        nyertesek.push_back(abc.back());
-    }
-    *min = vesztesek[0];
-    *max = nyertesek[0];
-    for (int i = 0; i < nyertesek.size(); i++)
-    {
-        if (*max < nyertesek[i])
-        {
-            *max = nyertesek[i];
-        }
-        if (*min > vesztesek[i])
-        {
-            *min = vesztesek[i];
+            *max = abc[i];
         }
     }
 }
