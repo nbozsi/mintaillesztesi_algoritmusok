@@ -62,11 +62,12 @@ void timeit(vector<int> (*func)(string, Node *), string szoveg, Node *gyoker, in
         duration<double, std::milli> ms_double = t2 - t1;
         sum = sum + ms_double.count();
     }
-    cout << pos.back() << '\t' << sum / n;
+    cout << pos.size() << '\t' << sum / n;
 }
 void timeit(vector<int> (*func)(string, string, vector<int>), vector<int> (*func2)(string), string minta[], string szoveg, int tombmeret, int n)
 {
     vector<int> pos;
+    int talalat_counter = 0;
     double sum = 0;
     for (int j = 0; j < tombmeret; j++)
     {
@@ -76,15 +77,17 @@ void timeit(vector<int> (*func)(string, string, vector<int>), vector<int> (*func
             auto t1 = high_resolution_clock::now();
             pos = func(minta[j], szoveg, P);
             auto t2 = high_resolution_clock::now();
+            talalat_counter += pos.size();
             duration<double, std::milli> ms_double = t2 - t1;
             sum = sum + ms_double.count();
         }
     }
-    cout << pos.back() << '\t' << sum / n;
+    cout << talalat_counter / 10 << '\t' << sum / n;
 }
 void timeit(vector<int> (*func)(string, string, int, int), void (*func2)(string, int *, int *), string minta[], string szoveg, int tombmeret, int n)
 {
     vector<int> pos;
+    int talalat_counter = 0;
     double sum = 0;
     int x, y;
     for (int j = 0; j < tombmeret; j++)
@@ -95,15 +98,17 @@ void timeit(vector<int> (*func)(string, string, int, int), void (*func2)(string,
             auto t1 = high_resolution_clock::now();
             pos = func(minta[j], szoveg, y - x + 1, x);
             auto t2 = high_resolution_clock::now();
+            talalat_counter += pos.size();
             duration<double, std::milli> ms_double = t2 - t1;
             sum = sum + ms_double.count();
         }
     }
-    cout << pos.back() << '\t' << sum / n;
+    cout << talalat_counter / 10 << '\t' << sum / n;
 }
 void timeit(vector<int> (*func)(string, string, unordered_map<char, int>), unordered_map<char, int> (*func2)(string, string), string minta[], string szoveg, int tombmeret, int n)
 {
     vector<int> pos;
+    int talalat_counter = 0;
     double sum = 0;
     for (int j = 0; j < tombmeret; j++)
     {
@@ -113,15 +118,17 @@ void timeit(vector<int> (*func)(string, string, unordered_map<char, int>), unord
             auto t1 = high_resolution_clock::now();
             pos = func(minta[j], szoveg, tavok);
             auto t2 = high_resolution_clock::now();
+            talalat_counter += pos.size();
             duration<double, std::milli> ms_double = t2 - t1;
             sum = sum + ms_double.count();
         }
     }
-    cout << pos.back() << '\t' << sum / n;
+    cout << talalat_counter / 10 << '\t' << sum / n;
 }
 void timeit(vector<int> (*func)(string, string), string minta[], string szoveg, int tombmeret, int n)
 {
     vector<int> pos;
+    int talalat_counter = 0;
     double sum = 0;
     for (int j = 0; j < tombmeret; j++)
     {
@@ -130,9 +137,10 @@ void timeit(vector<int> (*func)(string, string), string minta[], string szoveg, 
             auto t1 = high_resolution_clock::now();
             pos = func(minta[j], szoveg);
             auto t2 = high_resolution_clock::now();
+            talalat_counter += pos.size();
             duration<double, std::milli> ms_double = t2 - t1;
             sum = sum + ms_double.count();
         }
     }
-    cout << pos.back() << '\t' << sum / n;
+    cout << talalat_counter / 10 << '\t' << sum / n;
 }
