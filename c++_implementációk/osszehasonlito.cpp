@@ -20,8 +20,8 @@ int main(int argc, char *argv[])
     int probak = 10;
 
     vector<int> P = labfej(minta); // előfeldolgozás
-    unordered_map tavok = tav(minta, szoveg);
-    unordered_map betuertek = charvalue(szoveg);
+    unordered_map<char, int> tavok = tav(minta, szoveg);
+    unordered_map<char, int> betuertek = charvalue(szoveg);
     int x, y;
     val(minta + szoveg, &x, &y);
 
