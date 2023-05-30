@@ -10,7 +10,7 @@ using namespace std::chrono;
 
 void timeit(vector<int> (*func)(string, string, vector<int>), string minta, string szoveg, vector<int> P, int); // function overloading, hogy mindre működjön
 void timeit(vector<int> (*func)(string, string, unordered_map<char, int>), string minta, string szoveg, unordered_map<char, int> tavok, int);
-void timeit(vector<int> (*func)(string, string, int, int), string minta, string szoveg, int alap, int val, int);
+void timeit(vector<int> (*func)(string, string, int, int, long long int), string minta, string szoveg, int alap, int val, long long int mintahash, int);
 void timeit(vector<int> (*func)(string, string), string minta, string szoveg, int);
 
 int main(int argc, char *argv[])
@@ -21,9 +21,9 @@ int main(int argc, char *argv[])
 
     vector<int> P = labfej(minta); // előfeldolgozás
     unordered_map<char, int> tavok = tav(minta, szoveg);
-    unordered_map<char, int> betuertek = charvalue(szoveg);
     int x, y;
     val(minta + szoveg, &x, &y);
+    long long int mintahash = myhash(minta, y - x + 1, x);
 
     cout << "brute_force" << '\t';
     timeit(&brute_force, minta, szoveg, probak);
@@ -38,7 +38,7 @@ int main(int argc, char *argv[])
     cout << '\n';
 
     cout << "Rabin-Karp" << '\t';
-    timeit(&RabinKarp, minta, szoveg, y - x + 1, x, probak);
+    timeit(&RabinKarp, minta, szoveg, y - x + 1, x, mintahash, probak);
     return 0;
 }
 
@@ -84,14 +84,14 @@ void timeit(vector<int> (*func)(string, string), string minta, string szoveg, in
     }
     cout << pos.size() << '\t' << sum / n;
 }
-void timeit(vector<int> (*func)(string, string, int, int), string minta, string szoveg, int alap, int val, int n)
+void timeit(vector<int> (*func)(string, string, int, int, long long int), string minta, string szoveg, int alap, int val, long long int mintahash, int n)
 {
     vector<int> pos;
     double sum = 0;
     for (int i = 0; i < n; i++)
     {
         auto t1 = high_resolution_clock::now();
-        pos = func(minta, szoveg, alap, val);
+        pos = func(minta, szoveg, alap, val, mintahash);
         auto t2 = high_resolution_clock::now();
         duration<double, std::milli> ms_double = t2 - t1;
         sum = sum + ms_double.count();
