@@ -3,19 +3,6 @@
 
 using namespace std;
 
-unordered_map<char, int> tav(string minta, string szoveg)
-{
-    unordered_map<char, int> E;
-    for (int i = 0; i < szoveg.length(); i++)
-    {
-        E[szoveg[i]] = minta.length();
-    }
-    for (int i = 0; i < minta.length() - 1; i++)
-    {
-        E[minta[i]] = minta.length() - i - 1;
-    }
-    return E;
-}
 void val2(string abc, int *min, int *max)
 {
     *min = abc[0];
@@ -33,7 +20,7 @@ void val2(string abc, int *min, int *max)
         }
     }
 }
-vector<int> tav2(string minta, string szoveg, int *shift)
+vector<int> tav(string minta, string szoveg, int *shift)
 {
     int y;
     val2(minta + szoveg, shift, &y);
