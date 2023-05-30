@@ -4,20 +4,15 @@
 #include <string>
 using namespace std;
 
-unordered_map<char, int> charvalue(string szoveg)
+long long int myhash(string minta, int alap, int val)
 {
-    unordered_map<char, int> E;
-    int next = 1;
-    pair<unordered_map<char, int>::iterator, bool> ret;
-    for (int i = 0; i < szoveg.length(); i++)
+    const int M = 1000000007;
+    long long int ertek = 0;
+    for (int i = 0; i < minta.length(); i++)
     {
-        ret = E.insert({szoveg[i], next});
-        if (ret.second)
-        {
-            next++;
-        }
+        ertek = (ertek * alap + minta[i] - val) % M; // minta hashének kiszámítása
     }
-    return E;
+    return ertek;
 }
 void val(string abc, int *min, int *max)
 {
@@ -36,17 +31,15 @@ void val(string abc, int *min, int *max)
         }
     }
 }
-vector<int> RabinKarp(string minta, string szoveg, int alap, int val)
+vector<int> RabinKarp(string minta, string szoveg, int alap, int val, long long int mintahash)
 {
     vector<int> talalatok;
     // int alap = E.size() + 1; // szamrendszer alapszama
-    int M = 1000000007; // ez egy nagyon nagy prímszám
+    const int M = 1000000007; // ez egy nagyon nagy prímszám
     int maxh = 1;
-    long long int mintahash = 0;
     long long int vizsgalthash = 0;
     for (int i = 0; i < minta.length(); i++)
     {
-        mintahash = (mintahash * alap + minta[i] - val) % M;        // minta hashének kiszámítása
         vizsgalthash = (vizsgalthash * alap + szoveg[i] - val) % M; // szoveg első substringének kiszámítása
     }
     for (int i = 0; i < minta.length() - 1; i++)
