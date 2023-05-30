@@ -36,7 +36,7 @@ vector<int> KMP(string minta, string szoveg, vector<int> P)
         {
             talalatok.push_back(i);
         }
-        if (szoveg[i + j] == minta[j])
+        if (szoveg[i + j] == minta[j] && j < minta.length())
         {
             j++;
         }
