@@ -10,17 +10,21 @@ vector<int> brute_force(string minta, string szoveg)
     for (int i = 0; i <= szoveg.length() - minta.length(); i++)
     {
         jo = true;
-        for (int j = 0; j < minta.length(); j++)
+        if (minta[0] == szoveg[i])
         {
-            if (minta[j] != szoveg[i + j])
+            for (int j = 1; j < minta.length(); j++)
             {
-                jo = false;
-                break;
+                if (minta[j] != szoveg[i + j])
+                {
+                    jo = false;
+                    break;
+                }
             }
-        }
-        if (jo)
-        {
-            talalatok.push_back(i);
+
+            if (jo)
+            {
+                talalatok.push_back(i);
+            }
         }
     }
     return talalatok;
