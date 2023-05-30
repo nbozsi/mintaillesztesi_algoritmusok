@@ -9,7 +9,7 @@ using namespace std;
 using namespace std::chrono;
 
 void timeit(vector<int> (*func)(string, string, vector<int>), string minta, string szoveg, vector<int> P, int); // function overloading, hogy mindre működjön
-void timeit(vector<int> (*func)(string, string, unordered_map<char, int>), string minta, string szoveg, unordered_map<char, int> tavok, int);
+void timeit(vector<int> (*func)(string, string, vector<int>, int), string minta, string szoveg, vector<int> tavok, int, int);
 void timeit(vector<int> (*func)(string, string, int, int, long long int), string minta, string szoveg, int alap, int val, long long int mintahash, int);
 void timeit(vector<int> (*func)(string, string), string minta, string szoveg, int);
 
@@ -20,7 +20,8 @@ int main(int argc, char *argv[])
     int probak = 10;
 
     vector<int> P = labfej(minta); // előfeldolgozás
-    unordered_map<char, int> tavok = tav(minta, szoveg);
+    int sh;
+    vector<int> tavok = tav(minta, szoveg, &sh);
     int x, y;
     val(minta + szoveg, &x, &y);
     long long int mintahash = myhash(minta, y - x + 1, x);
@@ -30,7 +31,7 @@ int main(int argc, char *argv[])
     cout << '\n';
 
     cout << "Horspool" << '\t';
-    timeit(&Horspool, minta, szoveg, tavok, probak);
+    timeit(&Horspool, minta, szoveg, tavok, sh, probak);
     cout << '\n';
 
     cout << "KMP" << '\t';
@@ -56,14 +57,14 @@ void timeit(vector<int> (*func)(string, string, vector<int>), string minta, stri
     }
     cout << pos.size() << '\t' << sum / n;
 }
-void timeit(vector<int> (*func)(string, string, unordered_map<char, int>), string minta, string szoveg, unordered_map<char, int> tavok, int n)
+void timeit(vector<int> (*func)(string, string, vector<int>, int), string minta, string szoveg, vector<int> tavok, int shift, int n)
 {
     vector<int> pos;
     double sum = 0;
     for (int i = 0; i < n; i++)
     {
         auto t1 = high_resolution_clock::now();
-        pos = func(minta, szoveg, tavok);
+        pos = func(minta, szoveg, tavok, shift);
         auto t2 = high_resolution_clock::now();
         duration<double, std::milli> ms_double = t2 - t1;
         sum = sum + ms_double.count();
