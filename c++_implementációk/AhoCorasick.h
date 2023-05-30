@@ -90,5 +90,10 @@ vector<int> AhoCorasick(string szoveg, Node *gyoker)
         }
         helyzet = miz;
     }
+    if (helyzet->szo_veg.length() > 0)
+    {
+        // std::cout << helyzet->szo_veg << " megjelenik " << i - helyzet->szo_veg.length() << "-tol " << i << "-ig.\n";
+        elofordulasok.push_back(szoveg.length() - helyzet->szo_veg.length());
+    }
     return elofordulasok;
 }
