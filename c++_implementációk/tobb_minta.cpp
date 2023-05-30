@@ -11,7 +11,7 @@ using namespace std::chrono;
 
 void timeit(vector<int> (*func)(string, string, vector<int>), vector<int> (*func2)(string), string minta[], string szoveg, int, int);                                                              // KMP
 void timeit(vector<int> (*func)(string, string, int, int, long long int), void (*func2)(string, int *, int *), long long int (*func3)(string, int, int), string minta[], string szoveg, int, int); // Rabin-Karp
-void timeit(vector<int> (*func)(string, string, unordered_map<char, int>), unordered_map<char, int> (*func2)(string, string), string minta[], string szoveg, int, int);                            // Horspool
+void timeit(vector<int> (*func)(string, string, vector<int>, int), vector<int> (*func2)(string, string, int *), string minta[], string szoveg, int, int);                                          // Horspool
 void timeit(vector<int> (*func)(string, string), string minta[], string szoveg, int, int);                                                                                                         // brute_force
 void timeit(vector<int> (*func)(string, Node *), string szoveg, Node *gyoker, int);                                                                                                                // aho-corasick
 
@@ -107,18 +107,19 @@ void timeit(vector<int> (*func)(string, string, int, int, long long int), void (
     }
     cout << talalat_counter / 10 << '\t' << sum / n;
 }
-void timeit(vector<int> (*func)(string, string, unordered_map<char, int>), unordered_map<char, int> (*func2)(string, string), string minta[], string szoveg, int tombmeret, int n)
+void timeit(vector<int> (*func)(string, string, vector<int>, int), vector<int> (*func2)(string, string, int *), string minta[], string szoveg, int tombmeret, int n)
 {
     vector<int> pos;
     int talalat_counter = 0;
     double sum = 0;
     for (int j = 0; j < tombmeret; j++)
     {
-        unordered_map<char, int> tavok = func2(minta[j], szoveg);
+        int x;
+        vector<int> tavok = func2(minta[j], szoveg, &x);
         for (int i = 0; i < n; i++)
         {
             auto t1 = high_resolution_clock::now();
-            pos = func(minta[j], szoveg, tavok);
+            pos = func(minta[j], szoveg, tavok, x);
             auto t2 = high_resolution_clock::now();
             talalat_counter += pos.size();
             duration<double, std::milli> ms_double = t2 - t1;
