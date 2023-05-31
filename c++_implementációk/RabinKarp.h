@@ -52,7 +52,7 @@ vector<int> RabinKarp(string minta, string szoveg, int alap, int val, long long 
     }
     for (int i = 1; i <= szoveg.length() - minta.length(); i++)
     {
-        vizsgalthash = (vizsgalthash - (szoveg[i - 1] - val) * maxh) % M; // betű eltávolítása az elejéről (hozzáadunk M-t hogy pozitív maradék legyen)
+        vizsgalthash = (vizsgalthash - (szoveg[i - 1] - val) * maxh) % M; // betű eltávolítása az elejéről
         if (vizsgalthash < 0)                                             // negatív maraékot pozitívra hozzuk
         {
             vizsgalthash = vizsgalthash + M;
