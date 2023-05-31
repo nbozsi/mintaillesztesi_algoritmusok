@@ -3,8 +3,9 @@
 
 using namespace std;
 
-int Levenshtein_tavolsag(string s, string t)
+vector<int> Levenshtein_tavolsag(string s, string t, int k)
 {
+    vector<int> talalatok;
     /* dinamikus programozással, n. sor m. hely tartalmazza az n, m hosszú kezdőszeletek levenshtein tavolságát,
         de csak két sorát tároljuk a mátrixnak, mivel nincs többre szükség*/
     vector<int> utolso(t.length() + 1);
@@ -12,7 +13,7 @@ int Levenshtein_tavolsag(string s, string t)
 
     for (int i = 0; i < t.length() + 1; i++)
     {
-        utolso[i] = i; // a 0 hosszú kezdőszelet és az i  hosszú távolsága i, mivel i hozzáadással tudjuk megkapni
+        utolso[i] = 0; // a 0 hosszú kezdőszelet és az i  hosszú távolsága i, mivel i hozzáadással tudjuk megkapni
     }
     int torles_ar;
     int beszuras_ar;
@@ -41,5 +42,12 @@ int Levenshtein_tavolsag(string s, string t)
             utolso[j] = aktualis[j]; // lemásoljuk az aktuálisat az utolsóba
         }
     }
-    return utolso[t.length()];
+    for (int i = 0; i < t.length() + 1; i++)
+    {
+        if (utolso[i] <= k)
+        {
+            talalatok.push_back(i);
+        }
+    }
+    return talalatok;
 }
