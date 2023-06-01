@@ -39,63 +39,75 @@ int main(int argc, char *argv[])
     cout << '\n';
 
     cout << "Rabin-Karp" << '\t';
-    timeit(&RabinKarp, minta, szoveg, y - x + 1, x, mintahash, probak);
+    timeit(&RabinKarp, minta, szoveg, y, x, mintahash, probak);
     return 0;
 }
 
 void timeit(vector<int> (*func)(string, string, vector<int>), string minta, string szoveg, vector<int> P, int n)
 {
     vector<int> pos;
-    double sum = 0;
+    double min = 1000;
     for (int i = 0; i < n; i++) // n-szer futtatjuk és a futásidők átlagát vesszük
     {
         auto t1 = high_resolution_clock::now(); // kezdő időpont
         pos = func(minta, szoveg, P);
         auto t2 = high_resolution_clock::now(); // végző időpont
         duration<double, std::milli> ms_double = t2 - t1;
-        sum = sum + ms_double.count();
+        if (min > ms_double.count())
+        {
+            min = ms_double.count();
+        }
     }
-    cout << pos.size() << '\t' << sum / n;
+    cout << pos.size() << '\t' << min;
 }
 void timeit(vector<int> (*func)(string, string, vector<int>, int), string minta, string szoveg, vector<int> tavok, int shift, int n)
 {
     vector<int> pos;
-    double sum = 0;
+    double min = 1000;
     for (int i = 0; i < n; i++)
     {
         auto t1 = high_resolution_clock::now();
         pos = func(minta, szoveg, tavok, shift);
         auto t2 = high_resolution_clock::now();
         duration<double, std::milli> ms_double = t2 - t1;
-        sum = sum + ms_double.count();
+        if (min > ms_double.count())
+        {
+            min = ms_double.count();
+        }
     }
-    cout << pos.size() << '\t' << sum / n;
+    cout << pos.size() << '\t' << min;
 }
 void timeit(vector<int> (*func)(string, string), string minta, string szoveg, int n)
 {
     vector<int> pos;
-    double sum = 0;
+    double min = 1000;
     for (int i = 0; i < n; i++)
     {
         auto t1 = high_resolution_clock::now();
         pos = func(minta, szoveg);
         auto t2 = high_resolution_clock::now();
         duration<double, std::milli> ms_double = t2 - t1;
-        sum = sum + ms_double.count();
+        if (min > ms_double.count())
+        {
+            min = ms_double.count();
+        }
     }
-    cout << pos.size() << '\t' << sum / n;
+    cout << pos.size() << '\t' << min;
 }
 void timeit(vector<int> (*func)(string, string, int, int, long long int), string minta, string szoveg, int alap, int val, long long int mintahash, int n)
 {
     vector<int> pos;
-    double sum = 0;
+    double min = 1000;
     for (int i = 0; i < n; i++)
     {
         auto t1 = high_resolution_clock::now();
         pos = func(minta, szoveg, alap, val, mintahash);
         auto t2 = high_resolution_clock::now();
         duration<double, std::milli> ms_double = t2 - t1;
-        sum = sum + ms_double.count();
+        if (min > ms_double.count())
+        {
+            min = ms_double.count();
+        }
     }
-    cout << pos.size() << '\t' << sum / n;
+    cout << pos.size() << '\t' << min;
 }
