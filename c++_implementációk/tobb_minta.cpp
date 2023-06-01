@@ -53,22 +53,25 @@ int main(int argc, char *argv[])
 void timeit(vector<int> (*func)(string, Node *), string szoveg, Node *gyoker, int n)
 {
     vector<int> pos;
-    double sum = 0;
+    double min = 10000;
     for (int i = 0; i < n; i++)
     {
         auto t1 = high_resolution_clock::now();
         pos = func(szoveg, gyoker);
         auto t2 = high_resolution_clock::now();
         duration<double, std::milli> ms_double = t2 - t1;
-        sum = sum + ms_double.count();
+        if (min > ms_double.count())
+        {
+            min = ms_double.count();
+        }
     }
-    cout << pos.size() << '\t' << sum / n;
+    cout << pos.size() << '\t' << min;
 }
 void timeit(vector<int> (*func)(string, string, vector<int>), vector<int> (*func2)(string), string minta[], string szoveg, int tombmeret, int n)
 {
     vector<int> pos;
     int talalat_counter = 0;
-    double sum = 0;
+    double min = 10000;
     for (int j = 0; j < tombmeret; j++)
     {
         vector<int> P = func2(minta[j]);
@@ -79,39 +82,45 @@ void timeit(vector<int> (*func)(string, string, vector<int>), vector<int> (*func
             auto t2 = high_resolution_clock::now();
             talalat_counter += pos.size();
             duration<double, std::milli> ms_double = t2 - t1;
-            sum = sum + ms_double.count();
+            if (min > ms_double.count())
+            {
+                min = ms_double.count();
+            }
         }
     }
-    cout << talalat_counter / 10 << '\t' << sum / n;
+    cout << talalat_counter / 10 << '\t' << min;
 }
 void timeit(vector<int> (*func)(string, string, int, int, long long int), void (*func2)(string, int *, int *), long long int (*func3)(string, int, int), string minta[], string szoveg, int tombmeret, int n)
 {
     vector<int> pos;
     int talalat_counter = 0;
-    double sum = 0;
+    double min = 10000;
     int x, y;
     long long int mintahash;
     for (int j = 0; j < tombmeret; j++)
     {
         func2(minta[j] + szoveg, &x, &y);
-        mintahash = func3(minta[j], y - x + 1, x);
+        mintahash = func3(minta[j], y, x);
         for (int i = 0; i < n; i++)
         {
             auto t1 = high_resolution_clock::now();
-            pos = func(minta[j], szoveg, y - x + 1, x, mintahash);
+            pos = func(minta[j], szoveg, y, x, mintahash);
             auto t2 = high_resolution_clock::now();
             talalat_counter += pos.size();
             duration<double, std::milli> ms_double = t2 - t1;
-            sum = sum + ms_double.count();
+            if (min > ms_double.count())
+            {
+                min = ms_double.count();
+            }
         }
     }
-    cout << talalat_counter / 10 << '\t' << sum / n;
+    cout << talalat_counter / 10 << '\t' << min;
 }
 void timeit(vector<int> (*func)(string, string, vector<int>, int), vector<int> (*func2)(string, string, int *), string minta[], string szoveg, int tombmeret, int n)
 {
     vector<int> pos;
     int talalat_counter = 0;
-    double sum = 0;
+    double min = 10000;
     for (int j = 0; j < tombmeret; j++)
     {
         int x;
@@ -123,16 +132,19 @@ void timeit(vector<int> (*func)(string, string, vector<int>, int), vector<int> (
             auto t2 = high_resolution_clock::now();
             talalat_counter += pos.size();
             duration<double, std::milli> ms_double = t2 - t1;
-            sum = sum + ms_double.count();
+            if (min > ms_double.count())
+            {
+                min = ms_double.count();
+            }
         }
     }
-    cout << talalat_counter / 10 << '\t' << sum / n;
+    cout << talalat_counter / 10 << '\t' << min;
 }
 void timeit(vector<int> (*func)(string, string), string minta[], string szoveg, int tombmeret, int n)
 {
     vector<int> pos;
     int talalat_counter = 0;
-    double sum = 0;
+    double min = 10000;
     for (int j = 0; j < tombmeret; j++)
     {
         for (int i = 0; i < n; i++)
@@ -142,8 +154,11 @@ void timeit(vector<int> (*func)(string, string), string minta[], string szoveg, 
             auto t2 = high_resolution_clock::now();
             talalat_counter += pos.size();
             duration<double, std::milli> ms_double = t2 - t1;
-            sum = sum + ms_double.count();
+            if (min > ms_double.count())
+            {
+                min = ms_double.count();
+            }
         }
     }
-    cout << talalat_counter / 10 << '\t' << sum / n;
+    cout << talalat_counter / 10 << '\t' << min;
 }
