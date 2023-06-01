@@ -30,6 +30,12 @@ void val(string abc, int *min, int *max)
             *max = abc[i];
         }
     }
+    int alap = 1;
+    while (alap < min - max + 1)
+    {
+        alap = alap * 2;
+    }
+    *max = alap;
 }
 vector<int> RabinKarp(string minta, string szoveg, int alap, int val, long long int mintahash)
 {
