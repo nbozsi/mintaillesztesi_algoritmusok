@@ -7,7 +7,7 @@ void val2(string abc, int *min, int *max)
 {
     *min = abc[0];
     *max = abc[0];
-    for (int i = 0; i < abc.length() - 1; i += 2)
+    for (int i = 0; i < abc.length(); i++)
     {
         if (abc[i] < *min)
         {
