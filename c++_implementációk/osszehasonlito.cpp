@@ -15,8 +15,17 @@ void timeit(vector<int> (*func)(string, string), string minta, string szoveg, in
 
 int main(int argc, char *argv[])
 {
-    string minta(argv[1]); // beolvasás
-    string szoveg(argv[2]);
+    string minta;
+    string szoveg;
+    if (argc > 1)
+    {
+        minta = argv[1]; // beolvasás
+        szoveg = argv[2];
+    }
+    else
+    {
+        return 1;
+    }
     int probak = 10;
 
     vector<int> P = labfej(minta); // előfeldolgozás
