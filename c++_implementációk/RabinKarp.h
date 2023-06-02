@@ -31,11 +31,11 @@ void val(string abc, int *min, int *max)
         }
     }
     int alap = 1;
-    while (alap < min - max + 1)
+    while (alap < max - min + 1)
     {
         alap = alap * 2;
     }
-    *max = alap;
+    *max = alap + 1;
 }
 vector<int> RabinKarp(string minta, string szoveg, int alap, int val, long long int mintahash)
 {
