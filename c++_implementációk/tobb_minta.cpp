@@ -3,17 +3,17 @@
 #include "brute_force.h"
 #include "Horspool.h"
 #include "KMP.h"
-#include "RabinKarp.h"
+#include "RabinKarp_plus.h"
 #include "AhoCorasick.h"
 
 using namespace std;
 using namespace std::chrono;
 
-void timeit(vector<int> (*func)(string, string, vector<int>), vector<int> (*func2)(string), string minta[], string szoveg, int, int);                                                              // KMP
-void timeit(vector<int> (*func)(string, string, int, int, long long int), void (*func2)(string, int *, int *), long long int (*func3)(string, int, int), string minta[], string szoveg, int, int); // Rabin-Karp
-void timeit(vector<int> (*func)(string, string, vector<int>, int), vector<int> (*func2)(string, string, int *), string minta[], string szoveg, int, int);                                          // Horspool
-void timeit(vector<int> (*func)(string, string), string minta[], string szoveg, int, int);                                                                                                         // brute_force
-void timeit(vector<int> (*func)(string, Node *), string szoveg, Node *gyoker, int);                                                                                                                // aho-corasick
+void timeit(vector<int> (*func)(string, string, vector<int>), vector<int> (*func2)(string), string minta[], string szoveg, int, int);                     // KMP
+void timeit(vector<int> (*func)(int, string, int, int, unordered_map<int, string>), int, int, int, unordered_map<int, string>, string szoveg, int);       // Karp-Rabin
+void timeit(vector<int> (*func)(string, string, vector<int>, int), vector<int> (*func2)(string, string, int *), string minta[], string szoveg, int, int); // Horspool
+void timeit(vector<int> (*func)(string, string), string minta[], string szoveg, int, int);                                                                // brute_force
+void timeit(vector<int> (*func)(string, Node *), string szoveg, Node *gyoker, int);                                                                       // aho-corasick
 
 int main(int argc, char *argv[])
 {
@@ -27,6 +27,9 @@ int main(int argc, char *argv[])
     int probak = 10;
     // előfeldolgozás
     Node *gyok = epites(mintak, argc - 2);
+    int x, y;
+    val(szoveg, &x, &y);
+    unordered_map<int, string> table = my_hashes(mintak, argc - 2, y, x);
 
     cout << "brute_force" << '\t';
     timeit(&brute_force, mintak, szoveg, argc - 2, probak);
@@ -40,8 +43,8 @@ int main(int argc, char *argv[])
     timeit(&KMP, &labfej, mintak, szoveg, argc - 2, probak);
     cout << '\n';
 
-    cout << "Rabin-Karp" << '\t';
-    timeit(&RabinKarp, &val, &myhash, mintak, szoveg, argc - 2, probak);
+    cout << "Karp-Rabin" << '\t';
+    timeit(&RabinKarp_plus, mintak[0].length(), y, x, table, szoveg, probak);
     cout << '\n';
 
     cout << "Aho-Corasick" << '\t';
@@ -92,33 +95,22 @@ void timeit(vector<int> (*func)(string, string, vector<int>), vector<int> (*func
     }
     cout << talalat_counter / 10 << '\t' << sum;
 }
-void timeit(vector<int> (*func)(string, string, int, int, long long int), void (*func2)(string, int *, int *), long long int (*func3)(string, int, int), string minta[], string szoveg, int tombmeret, int n)
+void timeit(vector<int> (*func)(int, string, int, int, unordered_map<int, string>), int mintahossz, int alap, int val, unordered_map<int, string> table, string szoveg, int n)
 {
     vector<int> pos;
-    int talalat_counter = 0;
-    double sum = 0;
-    int x, y;
-    long long int mintahash;
-    for (int j = 0; j < tombmeret; j++)
+    double min = 10000;
+    for (int i = 0; i < n; i++)
     {
-        double min = 10000;
-        func2(minta[j] + szoveg, &x, &y);
-        mintahash = func3(minta[j], y, x);
-        for (int i = 0; i < n; i++)
+        auto t1 = high_resolution_clock::now();
+        pos = func(mintahossz, szoveg, alap, val, table);
+        auto t2 = high_resolution_clock::now();
+        duration<double, std::milli> ms_double = t2 - t1;
+        if (min > ms_double.count())
         {
-            auto t1 = high_resolution_clock::now();
-            pos = func(minta[j], szoveg, y, x, mintahash);
-            auto t2 = high_resolution_clock::now();
-            talalat_counter += pos.size();
-            duration<double, std::milli> ms_double = t2 - t1;
-            if (min > ms_double.count())
-            {
-                min = ms_double.count();
-            }
+            min = ms_double.count();
         }
-        sum = sum + min;
     }
-    cout << talalat_counter / 10 << '\t' << sum;
+    cout << pos.size() << '\t' << min;
 }
 void timeit(vector<int> (*func)(string, string, vector<int>, int), vector<int> (*func2)(string, string, int *), string minta[], string szoveg, int tombmeret, int n)
 {

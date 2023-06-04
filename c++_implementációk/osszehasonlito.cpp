@@ -33,7 +33,7 @@ int main(int argc, char *argv[])
     vector<int> tavok = tav(minta, szoveg, &sh);
     int x, y;
     val(minta + szoveg, &x, &y);
-    long long int mintahash = myhash(minta, y - x + 1, x);
+    long long int mintahash = myhash(minta, y, x);
 
     cout << "brute_force" << '\t';
     timeit(&brute_force, minta, szoveg, probak);
@@ -47,7 +47,7 @@ int main(int argc, char *argv[])
     timeit(&KMP, minta, szoveg, P, probak);
     cout << '\n';
 
-    cout << "Rabin-Karp" << '\t';
+    cout << "Karp-Rabin" << '\t';
     timeit(&RabinKarp, minta, szoveg, y, x, mintahash, probak);
     return 0;
 }
