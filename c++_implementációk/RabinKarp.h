@@ -66,7 +66,19 @@ vector<int> RabinKarp(string minta, string szoveg, int alap, int val, long long 
         vizsgalthash = (vizsgalthash * alap + (szoveg[i + minta.length() - 1] - val)) % M; // betű hozzáadása a végéhez
         if (vizsgalthash == mintahash)
         {
-            talalatok.push_back(i);
+            bool jo = true;
+            for (int j = 0; j < minta.length(); j++)
+            {
+                if (minta[j] != szoveg[i + j])
+                {
+                    jo = false;
+                    break;
+                }
+            }
+            if (jo)
+            {
+                talalatok.push_back(i);
+            }
         }
     }
     return talalatok;
