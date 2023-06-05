@@ -4,8 +4,9 @@
 #include <string>
 using namespace std;
 
-long long int myhash(string minta, int alap, int val)
+long long int myhash(string minta, int val)
 {
+    int alap = 64;
     const int M = 1000000007;
     long long int ertek = 0;
     for (int i = 0; i < minta.length(); i++)
@@ -37,8 +38,9 @@ void val(string abc, int *min, int *max)
     }*/
     *max = *max - *min;
 }
-vector<int> RabinKarp(string minta, string szoveg, int alap, int val, long long int mintahash)
+vector<int> RabinKarp(string minta, string szoveg, int val, long long int mintahash)
 {
+    int alap = 64;
     vector<int> talalatok;
     // int alap = E.size() + 1; // szamrendszer alapszama
     const int M = 1000000007; // ez egy nagyon nagy prímszám
