@@ -25,7 +25,7 @@ int main(int argc, char *argv[])
     {
         return 1;
     }
-    int probak = 5;
+    int probak = 10;
     cout << "brute_force" << '\t';
     timeit(&brute_force, minta, szoveg, probak);
     cout << '\n';
