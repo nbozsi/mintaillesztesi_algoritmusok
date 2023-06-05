@@ -3,19 +3,20 @@
 
 using namespace std;
 
-unordered_map<int, string> my_hashes(string mintak[], int k, int alap, int val)
+unordered_map<int, string> my_hashes(string mintak[], int k, int val)
 {
     unordered_map<int, string> my_hashes;
     for (int i = 0; i < k; i++)
     {
-        my_hashes.insert({myhash(mintak[i], alap, val), mintak[i]});
+        my_hashes.insert({myhash(mintak[i], val), mintak[i]});
     }
     return my_hashes;
 }
 
-vector<int> RabinKarp_plus(int mintahossz, string szoveg, int alap, int val, unordered_map<int, string> table)
+vector<int> RabinKarp_plus(int mintahossz, string szoveg, int val, unordered_map<int, string> table)
 {
     vector<int> talalatok;
+    int alap = 64;
     // int alap = E.size() + 1; // szamrendszer alapszama
     const int M = 1000000007; // ez egy nagyon nagy prímszám
     int maxh = 1;
