@@ -10,7 +10,7 @@ using namespace std::chrono;
 
 void timeit(vector<int> (*func)(string, string, vector<int>), string minta, string szoveg, vector<int> P, int); // function overloading, hogy mindre működjön
 void timeit(vector<int> (*func)(string, string, vector<int>, int), string minta, string szoveg, vector<int> tavok, int, int);
-void timeit(vector<int> (*func)(string, string, int, int, long long int), string minta, string szoveg, int alap, int val, long long int mintahash, int);
+void timeit(vector<int> (*func)(string, string, int, long long int), string minta, string szoveg, int val, long long int mintahash, int);
 void timeit(vector<int> (*func)(string, string), string minta, string szoveg, int);
 
 int main(int argc, char *argv[])
@@ -33,7 +33,7 @@ int main(int argc, char *argv[])
     vector<int> tavok = tav(minta, szoveg, &sh);
     int x, y;
     val(minta + szoveg, &x, &y);
-    long long int mintahash = myhash(minta, y, x);
+    long long int mintahash = myhash(minta, x);
 
     cout << "brute_force" << '\t';
     timeit(&brute_force, minta, szoveg, probak);
@@ -48,7 +48,7 @@ int main(int argc, char *argv[])
     cout << '\n';
 
     cout << "Karp-Rabin" << '\t';
-    timeit(&RabinKarp, minta, szoveg, y, x, mintahash, probak);
+    timeit(&RabinKarp, minta, szoveg, x, mintahash, probak);
     return 0;
 }
 
@@ -103,14 +103,14 @@ void timeit(vector<int> (*func)(string, string), string minta, string szoveg, in
     }
     cout << pos.size() << '\t' << min;
 }
-void timeit(vector<int> (*func)(string, string, int, int, long long int), string minta, string szoveg, int alap, int val, long long int mintahash, int n)
+void timeit(vector<int> (*func)(string, string, int, long long int), string minta, string szoveg, int val, long long int mintahash, int n)
 {
     vector<int> pos;
     double min = 1000;
     for (int i = 0; i < n; i++)
     {
         auto t1 = high_resolution_clock::now();
-        pos = func(minta, szoveg, alap, val, mintahash);
+        pos = func(minta, szoveg, val, mintahash);
         auto t2 = high_resolution_clock::now();
         duration<double, std::milli> ms_double = t2 - t1;
         if (min > ms_double.count())
